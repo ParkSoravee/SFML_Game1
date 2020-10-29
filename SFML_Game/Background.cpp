@@ -3,14 +3,15 @@
 Background::Background(sf::Texture* texture, float speed)
 {
 	this->speed = speed;
+	this->size = sf::Vector2f(1920.0f, 1080.0f);
 	
-	body[0].setSize(sf::Vector2f(1920.0f, 1080.0f));
+	body[0].setSize(size);
 	body[0].setTexture(texture);
-	body[1].setSize(sf::Vector2f(1920.0f, 1080.0f));
+	body[1].setSize(size);
 	body[1].setTexture(texture);
 	if(speed < 0)
-	body[1].setPosition(body[1].getPosition().x + 1920.0f - 2.0f , 0.0f);
-	else body[1].setPosition(body[1].getPosition().x - 1920.0f + 2.0f, 0.0f);
+	body[1].setPosition(body[1].getPosition().x + size.x - 2.0f , 0.0f);
+	else body[1].setPosition(body[1].getPosition().x - size.x + 2.0f, 0.0f);
 }
 
 void Background::Update(sf::RenderWindow& window)
@@ -20,13 +21,15 @@ void Background::Update(sf::RenderWindow& window)
 	{
 		position = body[i].getPosition();
 
-		//body[i].setPosition(position.x += speed, position.y); // -0.05
-		body[i].move(speed , 0); // -0.05
+		body[i].setPosition(position.x += speed, position.y); // -0.05
+		//body[i].move(speed, 0); // -0.05
 
 		if (position.x <= -sizeX)
-			body[i].setPosition(sizeX - 4, position.y);
+			body[i].setPosition(sizeX - 4.0f, position.y);
+			//body[i].setPosition(sizeX, position.y);
 		else if(position.x >= sizeX)
 			body[i].setPosition(-sizeX + 4.0f, position.y);
+			//body[i].setPosition(-sizeX, position.y);
 	}
 	window.draw(body[0]);
 	window.draw(body[1]);

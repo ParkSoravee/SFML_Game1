@@ -10,6 +10,7 @@ public:
 private:
 	sf::RectangleShape body[2];
 	sf::Vector2f position;
+	sf::Vector2f size;
 	
 	float speed;
 	//unsigned int map;
