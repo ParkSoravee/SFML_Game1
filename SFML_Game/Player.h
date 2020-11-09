@@ -7,7 +7,7 @@ public:
 	Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed);
 
 	void Update(float deltaTime);
-	void Draw(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window, float deltaTime);
 
 private:
 	sf::RectangleShape body;

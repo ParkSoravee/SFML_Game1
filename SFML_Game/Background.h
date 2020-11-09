@@ -6,7 +6,7 @@ public:
 	Background(sf::Texture* texture, float speed);
 
 	void Update(float deltaTime);
-	void Draw(sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window, float deltatime);
 
 private:
 	sf::RectangleShape body[2];

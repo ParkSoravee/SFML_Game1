@@ -53,17 +53,12 @@ int main()
 			}
 		}
 		
-		player.Update(deltaTime);
-
-		for (Background& background : backgrounds)
-			background.Update(deltaTime);
-
 		window.clear();
 
 		for (Background& background : backgrounds)
-			background.Draw(window);
+			background.Draw(window, deltaTime);
 
-		player.Draw(window);
+		player.Draw(window, deltaTime);
 
 		window.display();
 	}

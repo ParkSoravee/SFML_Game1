@@ -14,11 +14,16 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 
 void Player::Update(float deltaTime)
 {
+	
+}
+
+void Player::Draw(sf::RenderWindow& window, float deltaTime)
+{
 	sf::Vector2f movement(0.0f, 0.0f);
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && body.getPosition().x > 0)
 		movement.x -= speed * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && body.getPosition().x < 1920-body.getSize().x)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && body.getPosition().x < 1920 - body.getSize().x)
 		movement.x += speed * deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && body.getPosition().y > 0)
 		movement.y -= speed * deltaTime;
@@ -37,9 +42,7 @@ void Player::Update(float deltaTime)
 	animation.Update(row, deltaTime);
 	body.setTextureRect(animation.uvRect);
 	body.move(movement);
-}
 
-void Player::Draw(sf::RenderWindow& window)
-{
+	//Draw
 	window.draw(body);
 }
