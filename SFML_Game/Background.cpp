@@ -18,6 +18,13 @@ Background::Background(sf::Texture* texture, float speed)
 
 void Background::Draw(sf::RenderWindow& window, float deltaTime)
 {
+	Update(deltaTime);
+	for(int i=0;i<2;i++)
+	window.draw(body[i]);
+}
+
+void Background::Update(float deltaTime)
+{
 	for (int i = 0; i < 2; i++)
 	{
 		position = body[i].getPosition();
@@ -29,13 +36,6 @@ void Background::Draw(sf::RenderWindow& window, float deltaTime)
 		else if (position.x >= size.x && speed > 0)
 			body[i].setPosition(-size.x + 6.0f, position.y);
 	}
-	
-	for(int i=0;i<2;i++)
-	window.draw(body[i]);
-}
 
-void Background::Update(float deltaTime)
-{
-	
 }
 
