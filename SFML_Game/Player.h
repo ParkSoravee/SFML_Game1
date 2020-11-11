@@ -1,10 +1,15 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
+#include "Bullet.h"
+#include <vector>
+#include <iostream>
 class Player
 {
 public:
 	Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed);
+
+	sf::Vector2f getPosition() { return body.getPosition(); }
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
@@ -14,5 +19,8 @@ private:
 	Animation animation;
 	unsigned int row;
 	float speed;
+
+	float delayTime = 0;
+	std::vector<Bullet> bullets;
 };
 

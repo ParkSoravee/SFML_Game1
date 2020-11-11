@@ -10,6 +10,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	//body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(206.0f, 206.0f);
 	body.setTexture(texture);
+
 }
 
 void Player::Update(float deltaTime)
@@ -37,11 +38,23 @@ void Player::Update(float deltaTime)
 	animation.Update(row, deltaTime);
 	body.setTextureRect(animation.uvRect);
 	body.move(movement);
+
+	//---- Bullet
+	this->delayTime += deltaTime;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->delayTime > 1)
+	{
+		printf("shot!\n");
+		this->bullets.push_back(Bullet(0, sf::Vector2f(50.0f, 50.0f), body.getPosition(), 300.0f)); //speed positive = player
+		this->delayTime = 0;
+	}
+
 }
 
 void Player::Draw(sf::RenderWindow& window, float deltaTime)
 {
 	Update(deltaTime);
-
 	window.draw(body);
+
+	for (Bullet& bullet : this->bullets)
+		bullet.Draw(window, deltaTime);
 }

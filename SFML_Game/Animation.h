@@ -17,6 +17,5 @@ private:
 
 	float totalTime;
 	float switchTime;
-
 };
 
