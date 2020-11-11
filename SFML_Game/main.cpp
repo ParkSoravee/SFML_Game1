@@ -15,7 +15,7 @@ int main()
 
 	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 350.0f);
 
-	
+	//----Background
 	sf::Texture bgTexture1[5];
 	bgTexture1[0].loadFromFile("./sprite/bg/bg1/Sky.png");
 	bgTexture1[1].loadFromFile("./sprite/bg/bg1/mountainA.png");
@@ -29,6 +29,11 @@ int main()
 	backgrounds.push_back(Background(&bgTexture1[2], -150.0f));
 	backgrounds.push_back(Background(&bgTexture1[3], 100.0f));
 	backgrounds.push_back(Background(&bgTexture1[4], -150.0f));
+
+	//----Bullet
+	/*sf::Texture bullTexture;
+	if (!bullTexture.loadFromFile("./sprite/Bullets/Hero-Bullet-C.png"))
+		printf("load not completed");*/
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;

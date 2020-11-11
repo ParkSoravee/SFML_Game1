@@ -11,7 +11,7 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switch
 	uvRect.height = texture->getSize().y / float(imageCount.y);
 }
 
-void Animation::Update(int row, float deltaTime)
+void Animation::Update(int row, float deltaTime, int imageX)
 {
 	currentImage.y = row;
 	totalTime += deltaTime;

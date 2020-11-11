@@ -20,7 +20,9 @@ private:
 	unsigned int row;
 	float speed;
 
+	sf::Texture bullTexture;
 	float delayTime = 0;
 	std::vector<Bullet> bullets;
+	bool canShot;
 };
 

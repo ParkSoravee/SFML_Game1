@@ -1,15 +1,12 @@
 #include "Bullet.h"
 
-Bullet::Bullet(unsigned int bullTex, sf::Vector2f size, sf::Vector2f position, float speed)
+Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, sf::Vector2f playerSize, float speed)
 {
 	this->speed = speed;
-
 	body.setSize(size);
 	//body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(position);
-	sf::Texture bullTexture;
-	if (!bullTexture.loadFromFile("./sprite/Bullets/Hero-Bullet-C.png"))
-		printf("load not completed");
+	body.setPosition(position.x + (2 * size.x) + 20.0f, position.y + (size.y / 2.0f) + 30.0f);
+	
 	
 	/*switch (bullTex)
 	{
@@ -19,7 +16,8 @@ Bullet::Bullet(unsigned int bullTex, sf::Vector2f size, sf::Vector2f position, f
 	default:
 		break;
 	}*/
-	body.setTexture(&bullTexture);
+
+	body.setTexture(texture);
 }
 
 void Bullet::Update(float deltaTime)

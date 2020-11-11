@@ -11,6 +11,10 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	body.setPosition(206.0f, 206.0f);
 	body.setTexture(texture);
 
+	
+	if (!bullTexture.loadFromFile("./sprite/Bullets/Hero-Bullet-C.png"))
+		printf("load not completed");
+
 }
 
 void Player::Update(float deltaTime)
@@ -26,27 +30,31 @@ void Player::Update(float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && body.getPosition().y < 1080 - body.getSize().y)
 		movement.y += speed * deltaTime;
 
-	if (movement.x == 0.0f)
+	//---- Bullet
+	this->delayTime += deltaTime;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->delayTime > 0.5)
 	{
-		row = 0;
+		canShot = false;
+		printf("shot!\n");
+		this->bullets.push_back(Bullet(&bullTexture, sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 60.0f)); //speed positive = player
+		this->delayTime = 0;
+	}
+	//----
+
+	if (!canShot)
+	{
+		row = 1;
 	}
 	else
 	{
-		row = 1;
+		row = 0;
 	}
 
 	animation.Update(row, deltaTime);
 	body.setTextureRect(animation.uvRect);
 	body.move(movement);
 
-	//---- Bullet
-	this->delayTime += deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->delayTime > 1)
-	{
-		printf("shot!\n");
-		this->bullets.push_back(Bullet(0, sf::Vector2f(50.0f, 50.0f), body.getPosition(), 300.0f)); //speed positive = player
-		this->delayTime = 0;
-	}
+	
 
 }
 

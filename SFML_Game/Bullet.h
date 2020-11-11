@@ -3,7 +3,7 @@
 class Bullet
 {
 public:
-	Bullet(unsigned int bullTex, sf::Vector2f size, sf::Vector2f position, float speed);
+	Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, sf::Vector2f playerSize, float speed);
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
@@ -11,7 +11,4 @@ public:
 private:
 	sf::RectangleShape body;
 	float speed;
-
-	//sf::Texture bullTexture;
 };
-
