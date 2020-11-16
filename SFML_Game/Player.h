@@ -16,7 +16,8 @@ public:
 
 private:
 	sf::RectangleShape body;
-	Animation animation;
+	Animation normalAnimation;
+	Animation shotAnimation;
 	unsigned int row;
 	unsigned int colum;
 	float speed;

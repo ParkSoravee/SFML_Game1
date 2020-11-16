@@ -1,7 +1,8 @@
 #include "Player.h"
 
 Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed) :
-	animation(texture, imageCount, switchTime)
+	normalAnimation(texture, imageCount, switchTime),
+	shotAnimation(texture, imageCount, 0.15f)
 {
 	this->speed = speed;
 	this->switchTime = switchTime;
@@ -16,7 +17,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 
 	
 	if (!bullTexture.loadFromFile("./sprite/Bullets/Hero-Bullet-C.png"))
-		printf("load not completed");
+		printf("load bull not completed");
 
 }
 
@@ -42,7 +43,7 @@ void Player::Update(float deltaTime)
 		this->bullets.push_back(Bullet(&bullTexture, sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 600.0f)); //speed positive = player
 		this->delayTime = 0;
 	}
-	if (delayTime > 3.0f * switchTime)
+	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/)
 		canShot = true;
 	//----
 
@@ -50,17 +51,19 @@ void Player::Update(float deltaTime)
 	{
 		row = 1;
 		colum = 3;
-		animation.Update(row, deltaTime, colum);
+		shotAnimation.Update(row, deltaTime, colum);
+		body.setTextureRect(shotAnimation.uvRect);
 	}
 	else
 	{
 		row = 0;
 		colum = 8;
-		animation.Update(row, deltaTime, colum);
+		normalAnimation.Update(row, deltaTime, colum);
+		body.setTextureRect(normalAnimation.uvRect);
 	}
 
 	//animation.Update(row, deltaTime, colum);
-	body.setTextureRect(animation.uvRect);
+	//body.setTextureRect(animation.uvRect);
 	body.move(movement);
 
 }
