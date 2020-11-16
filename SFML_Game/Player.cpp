@@ -4,6 +4,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	animation(texture, imageCount, switchTime)
 {
 	this->speed = speed;
+	this->switchTime = switchTime;
 	row = 0;
 
 	body.setSize(sf::Vector2f(170.0f, 140.0f));
@@ -36,25 +37,27 @@ void Player::Update(float deltaTime)
 	{
 		canShot = false;
 		printf("shot!\n");
-		this->bullets.push_back(Bullet(&bullTexture, sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 60.0f)); //speed positive = player
+		this->bullets.push_back(Bullet(&bullTexture, sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 600.0f)); //speed positive = player
 		this->delayTime = 0;
 	}
+	if (delayTime > switchTime * 3.0f)
+		canShot = true;
 	//----
 
 	if (!canShot)
 	{
 		row = 1;
+		colum = 3;
 	}
 	else
 	{
 		row = 0;
+		colum = 8;
 	}
 
-	animation.Update(row, deltaTime);
+	animation.Update(row, deltaTime, colum);
 	body.setTextureRect(animation.uvRect);
 	body.move(movement);
-
-	
 
 }
 

@@ -18,7 +18,9 @@ private:
 	sf::RectangleShape body;
 	Animation animation;
 	unsigned int row;
+	unsigned int colum;
 	float speed;
+	float switchTime;
 
 	sf::Texture bullTexture;
 	float delayTime = 0;

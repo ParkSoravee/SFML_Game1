@@ -21,7 +21,7 @@ void Animation::Update(int row, float deltaTime, int imageX)
 		totalTime -= switchTime;
 		currentImage.x++;
 
-		if (currentImage.x >= imageCount.x) //back to first tux
+		if (currentImage.x >= imageX) //back to first tux
 		{
 			currentImage.x = 0;
 		}
