@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "Animation.h"
 #include "Bullet.h"
+#include "Collider.h"
 #include <vector>
 #include <iostream>
 class Player
@@ -13,6 +14,9 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
+
+	//--Collider
+	Collider GetCollider() { return Collider(body); }
 
 private:
 	sf::RectangleShape body;

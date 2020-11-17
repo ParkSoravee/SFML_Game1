@@ -43,22 +43,18 @@ void Player::Update(float deltaTime)
 		this->bullets.push_back(Bullet(&bullTexture, sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 600.0f)); //speed positive = player
 		this->delayTime = 0;
 	}
-	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/)
+	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/) //delay for shot
 		canShot = true;
 	//----
 
 	if (!canShot)
 	{
-		row = 1;
-		colum = 3;
-		shotAnimation.Update(row, deltaTime, colum);
+		shotAnimation.Update(1, deltaTime, 3);
 		body.setTextureRect(shotAnimation.uvRect);
 	}
 	else
 	{
-		row = 0;
-		colum = 8;
-		normalAnimation.Update(row, deltaTime, colum);
+		normalAnimation.Update(0, deltaTime, 8);
 		body.setTextureRect(normalAnimation.uvRect);
 	}
 
