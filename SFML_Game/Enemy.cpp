@@ -4,6 +4,7 @@ Enemy::Enemy(sf::Vector2f size)
 {
 	body.setSize(size);
 	body.setPosition(1506.0f, 206.0f);
+	body.setOrigin(body.getSize() / 2.0f);
 	body.setFillColor(sf::Color::Blue);
 }
 

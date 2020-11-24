@@ -4,7 +4,7 @@ Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, s
 {
 	this->speed = speed;
 	body.setSize(size);
-	//body.setOrigin(body.getSize() / 2.0f);
+	body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(position.x + (2 * size.x) + 20.0f, position.y + (size.y / 2.0f) + 30.0f);
 	
 	
@@ -39,4 +39,11 @@ void Bullet::Draw(sf::RenderWindow& window, float deltaTime)
 void Bullet::setDestroy(bool isDestroy)
 {
 	this->isDestroyBool = isDestroy;
+}
+
+bool Bullet::isOut()
+{
+	if (body.getPosition().x > 1920)
+		return true;
+	return false;
 }

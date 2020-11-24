@@ -46,15 +46,6 @@ void Player::Update(float deltaTime)
 	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/) //delay for shot
 		canShot = true;
 
-	for (int i = 0; i < bullets.size(); i++)
-	{
-		printf("%d", bullets[i].isDestroy() );
-		if ( bullets[i].isDestroy() ) 
-		{
-			bullets.erase(bullets.begin() + i);
-			printf("erase\n");
-		}
-	}
 	//----
 
 	if (!canShot)
@@ -81,4 +72,27 @@ void Player::Draw(sf::RenderWindow& window, float deltaTime)
 
 	for (Bullet& bullet : this->bullets)
 		bullet.Draw(window, deltaTime);
+}
+
+void Player::checkCollider(Collider temp)
+{
+	//check Collider
+	
+	for (Bullet& bullet : bullets)
+	{
+		if (bullet.GetCollider().CheckCollision(temp))
+		{
+			bullet.setDestroy(true);
+			printf("Collider!\n");
+		}
+	}
+
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		if (bullets[i].isDestroy() || bullets[i].isOut() )
+		{
+			bullets.erase(bullets.begin() + i);
+			printf("erase\n");
+		}
+	}
 }

@@ -62,17 +62,11 @@ int main()
 				break;
 			}
 		}
-		//check Collider
+
+		//check collider playerBullet and enemy
 		Collider temp = enemyTest.GetCollider();
-		for (Bullet& bullet : player.getBull())
-		{
-			if (bullet.GetCollider().CheckCollision(temp))
-			{
-				bullet.setDestroy(true);
-				printf("Collider!\n");
-			}
-		}
-		
+		player.checkCollider(temp);
+
 		window.clear();
 
 		for (Background& background : backgrounds)

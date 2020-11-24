@@ -11,6 +11,7 @@ public:
 
 	void setDestroy(bool isDestroy);
 	bool isDestroy() { return isDestroyBool; }
+	bool isOut();
 
 	Collider GetCollider() { return Collider(body); }
 
@@ -18,5 +19,5 @@ private:
 	sf::RectangleShape body;
 	float speed;
 
-	bool isDestroyBool;
+	bool isDestroyBool = false;
 };
