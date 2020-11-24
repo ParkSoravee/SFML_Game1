@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "Player.h"
+#include "Enemy.h"
+#include "Collider.h"
 #include "Background.h"
 
 #define SC_Width 1080
@@ -14,6 +16,9 @@ int main()
 	playerTexture.loadFromFile("./sprite/eagle01.png");
 
 	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 350.0f);
+
+	//-----Enemy
+	Enemy enemyTest(sf::Vector2f(120,200));
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -57,6 +62,16 @@ int main()
 				break;
 			}
 		}
+		//check Collider
+		Collider temp = enemyTest.GetCollider();
+		for (Bullet& bullet : player.getBull())
+		{
+			if (bullet.GetCollider().CheckCollision(temp))
+			{
+				//bullets.erase(bullet);
+				printf("Collider!\n");
+			}
+		}
 		
 		window.clear();
 
@@ -64,6 +79,8 @@ int main()
 			background.Draw(window, deltaTime);
 
 		player.Draw(window, deltaTime);
+
+		enemyTest.Draw(window, deltaTime);
 
 		window.display();
 	}

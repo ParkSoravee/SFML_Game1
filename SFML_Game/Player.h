@@ -14,6 +14,8 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
+	
+	std::vector<Bullet> getBull() { return bullets; }
 
 	//--Collider
 	Collider GetCollider() { return Collider(body); }

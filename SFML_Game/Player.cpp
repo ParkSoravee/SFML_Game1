@@ -45,6 +45,7 @@ void Player::Update(float deltaTime)
 	}
 	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/) //delay for shot
 		canShot = true;
+
 	//----
 
 	if (!canShot)
