@@ -35,3 +35,8 @@ void Bullet::Draw(sf::RenderWindow& window, float deltaTime)
 	Update(deltaTime);
 	window.draw(body);
 }
+
+void Bullet::setDestroy(bool isDestroy)
+{
+	this->isDestroyBool = isDestroy;
+}

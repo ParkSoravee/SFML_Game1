@@ -9,9 +9,14 @@ public:
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
 
+	void setDestroy(bool isDestroy);
+	bool isDestroy() { return isDestroyBool; }
+
 	Collider GetCollider() { return Collider(body); }
 
 private:
 	sf::RectangleShape body;
 	float speed;
+
+	bool isDestroyBool;
 };

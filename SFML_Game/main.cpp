@@ -68,7 +68,7 @@ int main()
 		{
 			if (bullet.GetCollider().CheckCollision(temp))
 			{
-				//bullets.erase(bullet);
+				bullet.setDestroy(true);
 				printf("Collider!\n");
 			}
 		}
