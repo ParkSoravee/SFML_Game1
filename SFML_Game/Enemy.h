@@ -1,6 +1,7 @@
 #pragma once
 #include<SFML/Graphics.hpp>
 #include "Collider.h"
+#include "Bullet.h"
 
 class Enemy
 {

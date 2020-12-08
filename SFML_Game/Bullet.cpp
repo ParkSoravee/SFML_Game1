@@ -2,22 +2,15 @@
 
 Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, sf::Vector2f playerSize, float speed)
 {
+	
+		
 	this->speed = speed;
 	body.setSize(size);
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setPosition(position.x + size.x, position.y + 10.0f );
 	
-	
-	/*switch (bullTex)
-	{
-	case 0:
-		bullTexture.loadFromFile("./sprite/Bullets/Hero Bullet C.png");
-		printf("\nloaded");
-	default:
-		break;
-	}*/
-
 	body.setTexture(texture);
+
 }
 
 void Bullet::Update(float deltaTime)

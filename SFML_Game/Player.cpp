@@ -15,10 +15,6 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	body.setPosition(206.0f, 206.0f);
 	body.setTexture(texture);
 
-	
-	if (!bullTexture.loadFromFile("./sprite/Bullets/Hero-Bullet-C.png"))
-		printf("load bull not completed");
-
 }
 
 void Player::Update(float deltaTime)
@@ -40,7 +36,7 @@ void Player::Update(float deltaTime)
 	{
 		canShot = false;
 		printf("shot!\n");
-		this->bullets.push_back(Bullet(&bullTexture, sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 600.0f)); //speed positive = player
+		this->bullets.push_back(Bullet(bullTexture(0), sf::Vector2f(70.0f, 50.0f), body.getPosition(), body.getSize(), 600.0f)); //speed positive = player
 		this->delayTime = 0;
 	}
 	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/) //delay for shot
@@ -95,4 +91,21 @@ void Player::checkCollider(Collider temp)
 			printf("erase\n");
 		}
 	}
+}
+
+sf::Texture* Player::bullTexture(int type)
+{
+	switch (type)
+	{
+	case 0:
+		bullTex.loadFromFile("./sprite/Bullets/Hero Bullet C.png");
+		break;
+	case 1:
+		bullTex.loadFromFile("./sprite/Bullets/Hero Bullet A.png");
+		break;
+	default:
+		break;
+	}
+	
+	return &bullTex;
 }

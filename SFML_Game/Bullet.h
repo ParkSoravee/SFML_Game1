@@ -17,6 +17,7 @@ public:
 
 private:
 	sf::RectangleShape body;
+	sf::Texture texture;
 	float speed;
 
 	bool isDestroyBool = false;

@@ -30,9 +30,12 @@ private:
 	float speed;
 	float switchTime;
 
-	sf::Texture bullTexture;
 	float delayTime = 0;
 	std::vector<Bullet> bullets;
 	bool canShot;
+
+	sf::Texture bullTex;
+	sf::Texture* bullTexture(int type);
+	
 };
 
