@@ -1,13 +1,16 @@
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, sf::Vector2f playerSize, float speed)
+Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, sf::Vector2f playerSize, float speed, unsigned int type)
 {
 	
 		
 	this->speed = speed;
 	body.setSize(size);
 	body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(position.x + size.x, position.y + 10.0f );
+	if (speed > 0)
+		body.setPosition(position.x + size.x, position.y + 10.0f );
+	else
+		body.setPosition(position.x - size.x, position.y + 10.0f);
 	
 	body.setTexture(texture);
 

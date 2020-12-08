@@ -34,8 +34,11 @@ private:
 	std::vector<Bullet> bullets;
 	bool canShot;
 
+	void setBull(int type);
 	sf::Texture bullTex;
-	sf::Texture* bullTexture(int type);
+	float bullSpeed;
+	sf::Vector2f bullSize;
+	unsigned int bullType;
 	
 };
 
