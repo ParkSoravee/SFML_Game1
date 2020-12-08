@@ -15,10 +15,10 @@ int main()
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("./sprite/eagle01.png");
 
-	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 350.0f);
+	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 550.0f);
 
 	//-----Enemy
-	Enemy enemyTest(sf::Vector2f(120,200));
+	Enemy enemyTest(sf::Vector2f(150,120), 150.0f);
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -64,6 +64,7 @@ int main()
 		}
 
 		//check collider playerBullet and enemy
+		//loop for: for all enemies
 		Collider temp = enemyTest.GetCollider();
 		player.checkCollider(temp);
 
@@ -74,7 +75,7 @@ int main()
 
 		player.Draw(window, deltaTime);
 
-		enemyTest.Draw(window, deltaTime);
+		enemyTest.Draw(window, deltaTime, player.getPosition());
 
 		window.display();
 	}

@@ -5,7 +5,7 @@ Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, s
 	this->speed = speed;
 	body.setSize(size);
 	body.setOrigin(body.getSize() / 2.0f);
-	body.setPosition(position.x + (2 * size.x) + 20.0f, position.y + (size.y / 2.0f) + 30.0f);
+	body.setPosition(position.x + size.x, position.y + 10.0f );
 	
 	
 	/*switch (bullTex)
