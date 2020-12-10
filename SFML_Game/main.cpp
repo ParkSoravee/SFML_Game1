@@ -33,7 +33,17 @@ int main()
 	scoreShow.setFillColor(sf::Color(57, 57, 57, 255));
 	scoreShow.setString(std::to_string(score));
 	scoreShow.setCharacterSize(70);
+	
+	//buttom Status
+	sf::Texture playerMini;
+	sf::RectangleShape playerMiniBody;
+	playerMini.loadFromFile("./sprite/status/mini-1.png");
+	playerMiniBody.setTexture(&playerMini);
+	playerMiniBody.setPosition(15, 1020);
+	playerMiniBody.setSize(sf::Vector2f(90,60));
 
+
+	//
 	sf::RenderWindow window(sf::VideoMode(SC_Height, SC_Width), "PARK's GAME", sf::Style::Fullscreen);
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("./sprite/eagle01.png");
@@ -100,8 +110,13 @@ int main()
 
 		enemyTest.Draw(window, deltaTime, player.getPosition());
 
+		//top Status
 		window.draw(scoreText);
 		window.draw(scoreShow);
+
+		//buttom Status
+		window.draw(playerMiniBody);
+
 		window.display();
 	}
 	return 0;
