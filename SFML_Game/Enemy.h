@@ -6,7 +6,7 @@
 class Enemy
 {
 public:
-	Enemy(sf::Vector2f size, float speed);
+	Enemy(sf::Vector2f size, float speed, unsigned int type);
 
 	sf::Vector2f getPosition() { return body.getPosition(); }
 
@@ -25,4 +25,3 @@ private:
 	float deltaY = 0;
 	
 };
-

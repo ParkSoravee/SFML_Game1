@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(sf::Vector2f size, float speed)
+Enemy::Enemy(sf::Vector2f size, float speed, unsigned int type)
 {
 	this->speed = speed;
 

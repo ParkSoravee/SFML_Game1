@@ -41,4 +41,3 @@ private:
 	unsigned int bullType;
 	
 };
-
