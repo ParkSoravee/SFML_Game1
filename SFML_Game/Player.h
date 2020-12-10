@@ -15,6 +15,8 @@ public:
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
 	void checkCollider(Collider temp);
+	
+	unsigned int getHP() { return HP; };
 
 	std::vector<Bullet> getBull() { return bullets; }
 
@@ -30,14 +32,16 @@ private:
 	float speed;
 	float switchTime;
 
+	unsigned int HP = 3;
+
 	float delayTime = 0;
 	std::vector<Bullet> bullets;
 	bool canShot;
 
 	void setBull(int type);
 	sf::Texture bullTex;
-	float bullSpeed;
+	float bullSpeed = 0;
 	sf::Vector2f bullSize;
-	unsigned int bullType;
+	unsigned int bullType = 0;
 	
 };

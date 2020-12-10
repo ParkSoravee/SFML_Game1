@@ -40,7 +40,17 @@ int main()
 	playerMini.loadFromFile("./sprite/status/mini-1.png");
 	playerMiniBody.setTexture(&playerMini);
 	playerMiniBody.setPosition(15, 1020);
-	playerMiniBody.setSize(sf::Vector2f(90,60));
+	playerMiniBody.setSize(sf::Vector2f(90, 60));
+	//heart
+	sf::RectangleShape heart[3];
+	sf::Texture heartTex;
+	heartTex.loadFromFile("./sprite/status/heart.png");
+	for (int i=0;i<3;i++)
+	{
+		heart[i].setTexture(&heartTex);
+		heart[i].setSize(sf::Vector2f(60, 60));
+		heart[i].setPosition(130 + (63 * i) , 1020);
+	}
 
 
 	//
@@ -67,11 +77,6 @@ int main()
 	backgrounds.push_back(Background(&bgTexture1[2], -150.0f));
 	backgrounds.push_back(Background(&bgTexture1[3], 100.0f));
 	backgrounds.push_back(Background(&bgTexture1[4], -150.0f));
-
-	//----Bullet
-	/*sf::Texture bullTexture;
-	if (!bullTexture.loadFromFile("./sprite/Bullets/Hero-Bullet-C.png"))
-		printf("load not completed");*/
 
 	float deltaTime = 0.0f;
 	sf::Clock clock;
@@ -116,6 +121,10 @@ int main()
 
 		//buttom Status
 		window.draw(playerMiniBody);
+		for (int i = 0; i < 3; i++)
+		{
+			window.draw(heart[i]);
+		}
 
 		window.display();
 	}
