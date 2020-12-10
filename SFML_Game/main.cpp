@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+//#include <string>
 #include "Player.h"
 #include "Enemy.h"
 #include "Collider.h"
@@ -11,6 +12,28 @@
 
 int main()
 {
+	//score
+	unsigned int score = 952;
+	bool isGameRun = 0;
+
+	//text
+	sf::Font font1;
+	font1.loadFromFile("./font/ERASBD.TTF");
+
+	sf::Text scoreText;
+	scoreText.setPosition(25, 15);
+	scoreText.setFont(font1);
+	scoreText.setFillColor(sf::Color(57, 57, 57, 255));
+	scoreText.setString("Score:");
+	scoreText.setCharacterSize(25);
+
+	sf::Text scoreShow;
+	scoreShow.setPosition(55, 35);
+	scoreShow.setFont(font1);
+	scoreShow.setFillColor(sf::Color(57, 57, 57, 255));
+	scoreShow.setString(std::to_string(score));
+	scoreShow.setCharacterSize(70);
+
 	sf::RenderWindow window(sf::VideoMode(SC_Height, SC_Width), "PARK's GAME", sf::Style::Fullscreen);
 	sf::Texture playerTexture;
 	playerTexture.loadFromFile("./sprite/eagle01.png");
@@ -18,7 +41,7 @@ int main()
 	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 550.0f);
 
 	//-----Enemy
-	Enemy enemyTest(sf::Vector2f(150,120), 150.0f);
+	Enemy enemyTest(sf::Vector2f(150,120), 150.0f, 1);
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -77,6 +100,8 @@ int main()
 
 		enemyTest.Draw(window, deltaTime, player.getPosition());
 
+		window.draw(scoreText);
+		window.draw(scoreShow);
 		window.display();
 	}
 	return 0;

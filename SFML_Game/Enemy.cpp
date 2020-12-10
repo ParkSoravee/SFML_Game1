@@ -23,23 +23,25 @@ void Enemy::Update(float deltaTime)
 		timeForPoint = 0;
 	}*/
 
+	//movement.y = speed * ( (playerPos.y > thisPos.y)-(playerPos.y < thisPos.y) );
+
 	deltaY = playerPos.y - thisPos.y;
 
 	if (deltaY > 0)
 	{
-		movement.y += speed * deltaTime;
+		movement.y += speed;
 	}
 	else if (deltaY < 0)
 	{
-		movement.y -= speed * deltaTime;
+		movement.y -= speed;
 	}
-	else
+	/*else
 	{
 		movement.y = 0;
-	}
+	}*/
 	
 	//printf("%f\n", thisPos.y);
-	body.move(movement);
+	body.move(movement * deltaTime);
 }
 
 void Enemy::Draw(sf::RenderWindow& window, float deltaTime, sf::Vector2f playerPos)
