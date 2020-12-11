@@ -32,7 +32,7 @@ private:
 	float speed;
 	float switchTime;
 
-	unsigned int HP = 1;
+	unsigned int HP = 3;
 
 	float delayTime = 0;
 	std::vector<Bullet> bullets;

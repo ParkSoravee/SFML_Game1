@@ -121,26 +121,11 @@ int main()
 
 		//buttom Status
 		window.draw(playerMiniBody);
-	/*	for (int i = 0; i < 3; i++)
+		for (int i = 0; i < player.getHP(); i++)
 		{
 			window.draw(heart[i]);
-		}*/
-		switch (player.getHP())
-		{
-		case 3:
-			window.draw(heart[0]);
-			window.draw(heart[1]);
-			window.draw(heart[2]);
-			break;
-		case 2:
-			window.draw(heart[0]);
-			window.draw(heart[1]);
-			break;
-		case 1:
-			window.draw(heart[0]);
-			break;
-		
 		}
+		
 
 		window.display();
 	}
