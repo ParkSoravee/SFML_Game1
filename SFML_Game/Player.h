@@ -14,7 +14,7 @@ public:
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime);
-	void checkCollider(Collider temp);
+	bool checkCollider(Collider temp);
 	
 	unsigned int getHP() { return HP; };
 

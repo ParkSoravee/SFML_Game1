@@ -17,6 +17,9 @@ public:
 	Collider GetCollider() { return Collider(body); }
 	void checkCollider(Collider temp);
 
+	void hurt();
+	unsigned int getHP() { return HP; }
+
 private:
 	sf::RectangleShape body;
 	float speed;

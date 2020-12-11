@@ -71,9 +71,19 @@ void Player::Draw(sf::RenderWindow& window, float deltaTime)
 		bullet.Draw(window, deltaTime);
 }
 
-void Player::checkCollider(Collider temp)
+bool Player::checkCollider(Collider temp)
 {
 	//check Collider
+	
+	//--erase bull
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		if (bullets[i].isDestroy() || bullets[i].isOut())
+		{
+			bullets.erase(bullets.begin() + i);
+			printf("player bull erase\n");
+		}
+	}
 	//--player bullet vs anemies
 	for (Bullet& bullet : bullets)
 	{
@@ -81,17 +91,11 @@ void Player::checkCollider(Collider temp)
 		{
 			bullet.setDestroy(true);
 			printf("Collider! from player\n");
+			return true;
 		}
 	}
-	//--erase bull
-	for (int i = 0; i < bullets.size(); i++)
-	{
-		if (bullets[i].isDestroy() || bullets[i].isOut() )
-		{
-			bullets.erase(bullets.begin() + i);
-			printf("player bull erase\n");
-		}
-	}
+	
+	return false;
 }
 
 void Player::setBull(int type)

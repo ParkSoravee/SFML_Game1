@@ -119,6 +119,12 @@ void Enemy::checkCollider(Collider temp)
 	}
 }
 
+void Enemy::hurt()
+{
+	printf("Ouchh!!\n");
+	HP--;
+}
+
 void Enemy::setBull(int type)
 {
 	switch (type)

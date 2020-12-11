@@ -64,7 +64,7 @@ int main()
 	//Enemy enemyTest(sf::Vector2f(150,120), 150.0f, 1);
 	std::vector<Enemy> enemies;
 	enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 1));
-	enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 2));
+	//enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 2));
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -112,11 +112,17 @@ int main()
 		for (int i = 0; i < enemies.size(); i++)
 		{
 			Collider temp1 = enemies[i].GetCollider();
-			player.checkCollider(temp1);
+
+			if (player.checkCollider(temp1))
+			{
+				enemies[i].hurt();
+				if(enemies[i].getHP() <= 0)
+					enemies.erase(enemies.begin() + i);
+			}
 		}
 
 		//check collider enemy and playerBullet
-		//loop for: for all enemies
+		//loop for: for all enemies +
 		/*Collider temp2 = player.GetCollider();
 		enemies[i].checkCollider(temp2);*/
 		for (int i = 0; i < enemies.size(); i++)
