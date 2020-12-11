@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(sf::Vector2f size, float speed, unsigned int type)
+Enemy::Enemy(unsigned int type)
 {
 	//set anemy
 	this->type = type;

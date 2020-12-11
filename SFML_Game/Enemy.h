@@ -6,7 +6,7 @@
 class Enemy
 {
 public:
-	Enemy(sf::Vector2f size, float speed, unsigned int type);
+	Enemy(unsigned int type);
 
 	sf::Vector2f getPosition() { return body.getPosition(); }
 
@@ -22,6 +22,7 @@ public:
 
 private:
 	sf::RectangleShape body;
+	sf::Vector2f size;
 	float speed;
 	sf::Vector2f thisPos;
 	sf::Vector2f playerPos;

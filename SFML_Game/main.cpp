@@ -49,7 +49,7 @@ int main()
 	{
 		heart[i].setTexture(&heartTex);
 		heart[i].setSize(sf::Vector2f(60, 60));
-		heart[i].setPosition(130 + (63 * i) , 1020);
+		heart[i].setPosition(130.0f + (63.0f * i) , 1020.0f);
 	}
 
 
@@ -63,7 +63,7 @@ int main()
 	//-----Enemy
 	//Enemy enemyTest(sf::Vector2f(150,120), 150.0f, 1);
 	std::vector<Enemy> enemies;
-	enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 1));
+	enemies.push_back(Enemy(1));
 	//enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 2));
 
 	//----Background
@@ -148,7 +148,7 @@ int main()
 
 		//buttom Status
 		window.draw(playerMiniBody);
-		for (int i = 0; i < player.getHP(); i++)
+		for (unsigned int i = 0; i < player.getHP(); i++)
 		{
 			window.draw(heart[i]);
 		}
