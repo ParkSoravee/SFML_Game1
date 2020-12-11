@@ -74,22 +74,22 @@ void Player::Draw(sf::RenderWindow& window, float deltaTime)
 void Player::checkCollider(Collider temp)
 {
 	//check Collider
-	
+	//--player bullet vs anemies
 	for (Bullet& bullet : bullets)
 	{
 		if (bullet.GetCollider().CheckCollision(temp))
 		{
 			bullet.setDestroy(true);
-			printf("Collider!\n");
+			printf("Collider! from player\n");
 		}
 	}
-
+	//--erase bull
 	for (int i = 0; i < bullets.size(); i++)
 	{
 		if (bullets[i].isDestroy() || bullets[i].isOut() )
 		{
 			bullets.erase(bullets.begin() + i);
-			printf("erase\n");
+			printf("player bull erase\n");
 		}
 	}
 }

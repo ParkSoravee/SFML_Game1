@@ -39,7 +39,7 @@ void Bullet::setDestroy(bool isDestroy)
 
 bool Bullet::isOut()
 {
-	if (body.getPosition().x > 1920)
+	if (body.getPosition().x > 1920 + 150 || body.getPosition().x < 0 - 150)
 		return true;
 	return false;
 }

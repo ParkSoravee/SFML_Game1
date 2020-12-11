@@ -102,9 +102,13 @@ int main()
 		}
 
 		//check collider playerBullet and enemy
+		
+		Collider temp1 = enemyTest.GetCollider();
+		player.checkCollider(temp1);
+
 		//loop for: for all enemies
-		Collider temp = enemyTest.GetCollider();
-		player.checkCollider(temp);
+		Collider temp2 = player.GetCollider();
+		enemyTest.checkCollider(temp2);
 
 		window.clear();
 

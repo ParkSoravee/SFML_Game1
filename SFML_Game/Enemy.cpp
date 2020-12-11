@@ -71,6 +71,30 @@ void Enemy::Draw(sf::RenderWindow& window, float deltaTime, sf::Vector2f playerP
 		bullet.Draw(window, deltaTime);
 }
 
+void Enemy::checkCollider(Collider temp)
+{
+	//check Collider
+	//--enemies bullet vs player
+	for (Bullet& bullet : bullets)
+	{
+		if (bullet.GetCollider().CheckCollision(temp))
+		{
+			bullet.setDestroy(true);
+			printf("Collider! from anemy\n");
+		}
+	}
+
+	//--erase bull
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		if (bullets[i].isDestroy() || bullets[i].isOut())
+		{
+			bullets.erase(bullets.begin() + i);
+			printf("anemies bull erase\n");
+		}
+	}
+}
+
 void Enemy::setBull(int type)
 {
 	switch (type)

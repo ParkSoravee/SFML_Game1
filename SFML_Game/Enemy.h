@@ -15,6 +15,7 @@ public:
 
 	//--Collider
 	Collider GetCollider() { return Collider(body); }
+	void checkCollider(Collider temp);
 
 private:
 	sf::RectangleShape body;
