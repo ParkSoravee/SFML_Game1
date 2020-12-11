@@ -98,13 +98,13 @@ void Player::setBull(int type)
 {
 	switch (type)
 	{
-	case 0:
+	case 1:
 		bullTex.loadFromFile("./sprite/Bullets/Hero Bullet C.png");
 		bullSize = sf::Vector2f(70.0f, 50.0f);
 		bullSpeed = 600.0f;
 		bullType = 0;
 		break;
-	case 1:
+	case 2:
 		bullTex.loadFromFile("./sprite/Bullets/Hero Bullet A.png");
 		bullSize = sf::Vector2f(100.0f, 25.0f);
 		bullSpeed = 1100.0f;

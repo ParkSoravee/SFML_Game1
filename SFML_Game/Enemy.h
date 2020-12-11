@@ -24,10 +24,11 @@ private:
 	sf::Vector2f playerPos;
 	float timeForPoint = 0;
 	float deltaY = 0;
-
+	unsigned int type;
 	unsigned int HP = 3;
+
 	std::vector<Bullet> bullets;
-	bool canShot;
+	bool canShot = false;
 	float shotDelay = 1;
 	float shotDelayTime = 0;
 	void setBull(int type);
