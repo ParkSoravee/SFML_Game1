@@ -61,7 +61,10 @@ int main()
 	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 550.0f);
 
 	//-----Enemy
-	Enemy enemyTest(sf::Vector2f(150,120), 150.0f, 1);
+	//Enemy enemyTest(sf::Vector2f(150,120), 150.0f, 1);
+	std::vector<Enemy> enemies;
+	enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 1));
+	enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 2));
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -103,12 +106,24 @@ int main()
 
 		//check collider playerBullet and enemy
 		
-		Collider temp1 = enemyTest.GetCollider();
-		player.checkCollider(temp1);
+		/*Collider temp1 = enemyTest.GetCollider();
+		player.checkCollider(temp1);*/
 
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			Collider temp1 = enemies[i].GetCollider();
+			player.checkCollider(temp1);
+		}
+
+		//check collider enemy and playerBullet
 		//loop for: for all enemies
-		Collider temp2 = player.GetCollider();
-		enemyTest.checkCollider(temp2);
+		/*Collider temp2 = player.GetCollider();
+		enemies[i].checkCollider(temp2);*/
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			Collider temp2 = player.GetCollider();
+			enemies[i].checkCollider(temp2);
+		}
 
 		window.clear();
 
@@ -117,7 +132,9 @@ int main()
 
 		player.Draw(window, deltaTime);
 
-		enemyTest.Draw(window, deltaTime, player.getPosition());
+		//enemyTest.Draw(window, deltaTime, player.getPosition());
+		for (Enemy& enemy : enemies)
+			enemy.Draw(window, deltaTime, player.getPosition());
 
 		//top Status
 		window.draw(scoreText);

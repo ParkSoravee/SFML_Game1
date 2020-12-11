@@ -8,21 +8,28 @@ Enemy::Enemy(sf::Vector2f size, float speed, unsigned int type)
 	{
 	case 1:
 		//size
+		size = sf::Vector2f(150, 120);
 		//texture
+
 		//speed
+		speed = 150.0f;
 		//hp
+		HP = 3;
 		//bull type
 		setBull(1);
 		break;
 	case 2:
-		
+		size = sf::Vector2f(150, 120);
+		speed = 90.0f;
+		HP = 4;
+		setBull(2);
 		break;
 	}
 
 	this->speed = speed;
 
 	body.setSize(size); //--
-	body.setPosition(1506.0f, 206.0f);
+	body.setPosition(1506.0f, 206.0f); //random with condition
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setFillColor(sf::Color::Blue);
 }
