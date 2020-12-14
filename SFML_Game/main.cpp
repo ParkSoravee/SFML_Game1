@@ -13,6 +13,7 @@
 int main()
 {
 	srand(time(NULL));
+	sf::Vector2f possition;
 
 	//score
 	unsigned int score = 952;
@@ -65,7 +66,21 @@ int main()
 	//-----Enemy
 	//Enemy enemyTest(sf::Vector2f(150,120), 150.0f, 1);
 	std::vector<Enemy> enemies;
-	enemies.push_back(Enemy(1));
+	//possition = ( player.getPosition().x, player.getPosition().y );
+
+	/*for (int i = 0; i < enemies.size(); i++)
+	{
+		
+	}
+
+	do 
+	{
+	float randomY = fmod(rand(), 500.0f);
+
+	} while (randomY < );*/
+	possition.x = 1300.0f + randomY;
+	possition.y = player.getPosition().y;
+	enemies.push_back(Enemy(1, possition));
 	//enemies.push_back(Enemy(sf::Vector2f(0, 0), 0.0f, 2));
 
 	//----Background

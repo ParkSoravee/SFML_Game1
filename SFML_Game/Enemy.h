@@ -6,7 +6,7 @@
 class Enemy
 {
 public:
-	Enemy(unsigned int type);
+	Enemy(int type, sf::Vector2f possition);
 
 	sf::Vector2f getPosition() { return body.getPosition(); }
 
@@ -23,12 +23,12 @@ public:
 private:
 	sf::RectangleShape body;
 	sf::Vector2f size;
-	float speed;
+	float speed = 0.0f;
 	sf::Vector2f thisPos;
 	sf::Vector2f playerPos;
 	float timeForPoint = 0;
 	float deltaY = 0;
-	unsigned int type;
+	int type;
 	unsigned int HP = 3;
 
 	std::vector<Bullet> bullets;

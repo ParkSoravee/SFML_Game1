@@ -1,9 +1,11 @@
 #include "Enemy.h"
 
-Enemy::Enemy(unsigned int type)
+Enemy::Enemy(int type, sf::Vector2f possition)
 {
 	//set anemy
 	this->type = type;
+	this->possition = possition;
+
 	switch (type)
 	{
 	case 1:
@@ -12,7 +14,7 @@ Enemy::Enemy(unsigned int type)
 		//size
 		size = sf::Vector2f(150, 120);
 		//texture
-
+		body.setFillColor(sf::Color::Blue);
 		//speed
 		speed = 150.0f;
 		//hp
@@ -22,18 +24,17 @@ Enemy::Enemy(unsigned int type)
 		break;
 	case 2:
 		size = sf::Vector2f(150, 120);
+		body.setFillColor(sf::Color::Red);
 		speed = 90.0f;
 		HP = 4;
 		setBull(2);
 		break;
 	}
 
-	this->speed = speed;
-
-	body.setSize(size); //--wswwsssdwadwdsaw swwswwssssssswsswwwswssw swwwwwwwwwswswawssas
-	body.setPosition( 1400 +( rand() % 400 ), 0.0f); //random with condition
+	body.setSize(size); //--
+	body.setPosition( 2000, 100 + (rand() % 900) ); //random with condition
 	body.setOrigin(body.getSize() / 2.0f);
-	body.setFillColor(sf::Color::Blue);
+	/*body.setFillColor(sf::Color::Blue);*/
 }
 
 void Enemy::Update(float deltaTime)
@@ -48,10 +49,19 @@ void Enemy::Update(float deltaTime)
 		thisPos.y = body.getPosition().y;
 		timeForPoint = 0;
 	}*/
+	//float delta_posX = possition.x - body.getPosition().x;
+	//float delta_posY = ;
 
-	//movement.y = speed * ( (playerPos.y > thisPos.y)-(playerPos.y < thisPos.y) );
+	switch (type)
+	{
+	case 1 :
+		movement.y += speed * ( (playerPos.y > thisPos.y)-(playerPos.y < thisPos.y) );
+		if (possition.x <= body.getPosition().x)
+			movement.x -= speed;
+	break;
+	}
 
-	deltaY = playerPos.y - thisPos.y;
+	/*deltaY = playerPos.y - thisPos.y;
 
 	if (deltaY > 0)
 	{
@@ -61,7 +71,7 @@ void Enemy::Update(float deltaTime)
 	{
 		movement.y -= speed;
 	}
-	/*else
+	//else
 	{
 		movement.y = 0;
 	}*/
@@ -171,7 +181,7 @@ void Enemy::setBull(int type)
 	case 6: //fire
 		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet F.png");
 		bullSize = sf::Vector2f(140.0f, 120.0f);
-		bullSpeed = 500.0f; //random??
+		bullSpeed = 2500.0f; //random??
 		bullType = 4; //random a lot
 		shotDelay = 7;
 		break;

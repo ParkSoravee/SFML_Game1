@@ -40,7 +40,7 @@ void Player::Update(float deltaTime)
 		this->bullets.push_back(Bullet(&bullTex, bullSize, body.getPosition(), body.getSize(), bullSpeed, bullType)); //speed positive = player
 		this->delayTime = 0;
 	}
-	if (delayTime > 3.0f * 0.15f/*showSwitchTime*/) //delay for shot
+	if (delayTime > 3.0f * 0.15f/*shotSwitchTime*/) //delay for shot
 		canShot = true;
 
 	//----
