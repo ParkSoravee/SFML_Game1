@@ -21,11 +21,11 @@ void Player::Update(float deltaTime)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && body.getPosition().x > 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && body.getPosition().x > 0 + body.getSize().x / 2)
 		movement.x -= speed * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && body.getPosition().x < 1920 - body.getSize().x)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) && body.getPosition().x < 1920 - body.getSize().x / 2)
 		movement.x += speed * deltaTime;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && body.getPosition().y > 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && body.getPosition().y > 0 + body.getSize().y / 2)
 		movement.y -= speed * deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && body.getPosition().y < 1080 - body.getSize().y)
 		movement.y += speed * deltaTime;

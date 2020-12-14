@@ -7,6 +7,8 @@ Enemy::Enemy(unsigned int type)
 	switch (type)
 	{
 	case 1:
+		//possition
+
 		//size
 		size = sf::Vector2f(150, 120);
 		//texture
@@ -28,8 +30,8 @@ Enemy::Enemy(unsigned int type)
 
 	this->speed = speed;
 
-	body.setSize(size); //--
-	body.setPosition(1506.0f, 206.0f); //random with condition
+	body.setSize(size); //--wswwsssdwadwdsaw swwswwssssssswsswwwswssw swwwwwwwwwswswawssas
+	body.setPosition( 1400 +( rand() % 400 ), 0.0f); //random with condition
 	body.setOrigin(body.getSize() / 2.0f);
 	body.setFillColor(sf::Color::Blue);
 }

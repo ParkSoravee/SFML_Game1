@@ -40,5 +40,6 @@ private:
 	float bullSpeed = 0;
 	sf::Vector2f bullSize;
 	unsigned int bullType = 0;
+	sf::Vector2f possition;
 
 };

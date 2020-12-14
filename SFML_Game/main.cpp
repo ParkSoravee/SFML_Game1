@@ -12,6 +12,8 @@
 
 int main()
 {
+	srand(time(NULL));
+
 	//score
 	unsigned int score = 952;
 	bool isGameRun = 0;
@@ -87,6 +89,8 @@ int main()
 
 	while (window.isOpen())
 	{
+
+
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
 		deltaTime = clock.restart().asSeconds();
 
@@ -120,7 +124,7 @@ int main()
 					enemies.erase(enemies.begin() + i);
 			}
 		}
-
+		
 		//check collider enemy and playerBullet
 		//loop for: for all enemies +
 		/*Collider temp2 = player.GetCollider();
