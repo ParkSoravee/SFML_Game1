@@ -2,6 +2,9 @@
 #include<SFML/Graphics.hpp>
 #include "Collider.h"
 #include "Bullet.h"
+#include "Animation.h"
+#include <vector>
+#include <iostream>
 
 class Enemy
 {
@@ -26,6 +29,9 @@ public:
 private:
 	sf::RectangleShape body;
 	sf::Vector2f size;
+
+	
+
 	float speed = 0.0f;
 	sf::Vector2f thisPos;
 	sf::Vector2f playerPos;
