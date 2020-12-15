@@ -17,18 +17,21 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		//texture
 		body.setFillColor(sf::Color::Blue);
 		//speed
-		speed = 150.0f;
+		speed = 200.0f;
 		//hp
-		HP = 3;
+		HP = 4;
 		//bull type
 		setBull(1);
+		//score set
+		score = 300;
 		break;
 	case 2:
 		size = sf::Vector2f(150, 120);
 		body.setFillColor(sf::Color::Red);
-		speed = 90.0f;
+		speed = 160.0f;
 		HP = 4;
 		setBull(2);
+		score = 400;
 		break;
 	case 3:
 		size = sf::Vector2f(150, 120);
@@ -36,6 +39,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		speed = 150.0f;
 		HP = 5;
 		setBull(3);
+		score = 500;
 		break;
 	case 4:
 		size = sf::Vector2f(150, 120);
@@ -43,6 +47,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		speed = 200.0f;
 		HP = 5;
 		setBull(4);
+		score = 700;
 		break;
 	case 5:
 		size = sf::Vector2f(150*3, 120*3);
@@ -50,6 +55,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		speed = 90.0f;
 		HP = 20;
 		setBull(5);
+		score = 2000;
 		break;
 	case 6:
 		size = sf::Vector2f(150, 120);
@@ -57,6 +63,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		speed = 400.0f;
 		HP = 7;
 		setBull(6);
+		score = 1000;
 		break;
 	}
 
@@ -101,7 +108,7 @@ void Enemy::Update(float deltaTime)
 			delay2 += deltaTime;
 			if (delay2 >= 1)
 			{
-				speed = 450.0f;
+				speed = 550.0f;
 				movement.x -= speed;
 				movement.y = 0;
 			}
@@ -239,7 +246,7 @@ void Enemy::setBull(int type)
 		bullSize = sf::Vector2f(85.0f, 50.0f);
 		bullSpeed = 600.0f;
 		bullType = 0;
-		shotDelay = 2;
+		shotDelay = 1.5;
 		break;
 	case 2:
 		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet C.png");

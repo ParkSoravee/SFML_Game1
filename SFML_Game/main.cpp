@@ -17,6 +17,12 @@ void showText(sf::Vector2f position, std::string word, sf::Font* font, int size,
 
 int main()
 {
+	//state game
+	sf::Clock gameTime;
+	bool canSpawn = false;
+	int GAMEPLAYSTATE = 0;
+	int n = 0;
+	//---
 
 	srand(time(NULL));
 	sf::Vector2f position;
@@ -24,7 +30,7 @@ int main()
 	unsigned state = MAINMENUSTATE;
 
 	//score
-	unsigned int score = 9859;
+	unsigned int score = 0;
 	bool isGameRun = 0;
 
 	bool ready = true;
@@ -82,8 +88,6 @@ int main()
 	//Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 550.0f);
 	//float randomY = fmod(rand(), 500.0f);
 	
-	
-
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -146,7 +150,7 @@ int main()
 	//---- 
 
 	float deltaTime = 0.0f;
-	//sf::Clock clock;
+
 	window.setFramerateLimit(120);
 
 	while (window.isOpen())
@@ -307,11 +311,11 @@ int main()
 			if (ready == true)
 			{
 			
-				position.x = 1300.0f + fmod(rand(), 500.0f);
+				/*position.x = 1300.0f + fmod(rand(), 500.0f);
 				position.y = player.getPosition().y;
 
-				enemies.push_back(Enemy(6, position));
-				/*enemies.push_back(Enemy(1, position));
+				enemies.push_back(Enemy(5, position));
+				enemies.push_back(Enemy(1, position));
 
 				position.x = 1300.0f + fmod(rand(), 500.0f);
 				for (int i = 0; i < enemies.size(); i++)
@@ -338,12 +342,120 @@ int main()
 				enemies.push_back(Enemy(4, position));
 
 				std::cout << enemies.size() << std::endl;*/
-				
-
+				gameTime.restart();
 				player.reset();
-
 				ready = false;
 			}
+			//game state --------------------
+			//printf("%f\n", gameTime.getElapsedTime().asSeconds());
+			switch (GAMEPLAYSTATE)
+			{
+			case 0:
+				if (gameTime.getElapsedTime().asSeconds() >= 2.0f)
+				{
+					canSpawn = true;
+					gameTime.restart();
+				}
+				if (canSpawn == true)
+				{
+					canSpawn = false;
+					switch (n) {
+					case 0:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(1, position));
+						n++;
+						break;
+					case 1:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(1, position));
+						n++;
+						break;
+					case 2:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(2, position));
+						n++;
+						break;
+					case 3:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(1, position));
+						n++;
+						break;
+					/*case 4:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(2, position));
+						n++;
+						break;*/
+					}
+				}
+				/*if (gameTime.getElapsedTime().asSeconds() == 1.0f)
+				{
+				position.x = 1300.0f + fmod(rand(), 500.0f);
+				position.y = player.getPosition().y;
+				enemies.push_back(Enemy(1, position));
+				printf("hey");
+				}
+				else if (gameTime.getElapsedTime().asSeconds() == 2.0f)
+				{
+					position.x = 1300.0f + fmod(rand(), 500.0f);
+					position.y = player.getPosition().y;
+					enemies.push_back(Enemy(1, position));
+				}
+				else if (gameTime.getElapsedTime().asSeconds() == 3)
+				{
+					position.x = 1300.0f + fmod(rand(), 500.0f);
+					position.y = player.getPosition().y;
+					enemies.push_back(Enemy(1, position));
+				}*/
+
+
+
+
+				//if (sizeof(enemies) <= 0) GAMEPLAYSTATE++;
+				break;
+			case 1: 
+
+				break;
+			case 2:
+
+				break;
+			case 3:
+
+				break;
+			case 4:
+
+				break;
+			case 5:
+
+				break;
+			default: // random * boss
+
+				break;
+			}
+
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) player.reset();
+			//--------------------------------------
+
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
 			//deltaTime = clock.restart().asSeconds();
 
@@ -373,6 +485,8 @@ int main()
 					if (enemies[i].getHP() <= 0)
 					{
 						enemies.erase(enemies.begin() + i);
+						score += enemies[i].getScore();
+						printf("%d\n", score);
 					}
 
 				}
@@ -399,15 +513,16 @@ int main()
 			if (player.getHP() <= 0)
 			{
 				
-				for (int i = 0; i < enemies.size(); i++)
+				/*for (int i = 0; i < enemies.size(); i++)
 				{
 					std::cout << enemies.size() << std::endl;
 					enemies.erase(enemies.begin());
+					
 					printf("i = %d\n", i);
 				}
 				
 				std::cout << "Enemy = " << enemies.size() << std::endl;
-				
+				*/
 				if(enemies.size() == 0)
 					state = GAMEOVERSTATE;
 			}
@@ -425,6 +540,7 @@ int main()
 
 			//top Status
 			window.draw(scoreText);
+			scoreShow.setString(std::to_string(score));
 			window.draw(scoreShow);
 
 			//buttom Status

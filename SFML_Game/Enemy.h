@@ -21,6 +21,8 @@ public:
 	void hurt();
 	unsigned int getHP() { return HP; }
 
+	int getScore() { return score; }
+
 private:
 	sf::RectangleShape body;
 	sf::Vector2f size;
@@ -47,4 +49,5 @@ private:
 	sf::Clock delay1;
 	sf::Clock delay3;
 	int count = 0;
+	int score = 0;
 };
