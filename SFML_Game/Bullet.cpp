@@ -12,8 +12,11 @@ Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, s
 	else
 		body.setPosition(position.x - size.x, position.y + 10.0f);
 	
-	body.setTexture(texture);
+	if(type == 2)
+		body.setPosition(1970, position.y);
 
+	body.setTexture(texture);
+	
 }
 
 void Bullet::Update(float deltaTime, sf::Vector2f playerPos)
@@ -39,6 +42,9 @@ void Bullet::Update(float deltaTime, sf::Vector2f playerPos)
 		}
 		
 			break;
+	case 2:
+		movement.x += speed;
+		break;
 
 	default:
 		break;

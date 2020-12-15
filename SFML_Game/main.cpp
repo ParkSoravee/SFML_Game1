@@ -310,7 +310,8 @@ int main()
 				position.x = 1300.0f + fmod(rand(), 500.0f);
 				position.y = player.getPosition().y;
 
-				enemies.push_back(Enemy(1, position));
+				enemies.push_back(Enemy(5, position));
+				/*enemies.push_back(Enemy(1, position));
 
 				position.x = 1300.0f + fmod(rand(), 500.0f);
 				for (int i = 0; i < enemies.size(); i++)
@@ -336,7 +337,7 @@ int main()
 				}
 				enemies.push_back(Enemy(4, position));
 
-				std::cout << enemies.size() << std::endl;
+				std::cout << enemies.size() << std::endl;*/
 				
 
 				player.reset();

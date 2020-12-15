@@ -44,7 +44,13 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		HP = 5;
 		setBull(4);
 		break;
-	
+	case 5:
+		size = sf::Vector2f(150*3, 120*3);
+		body.setFillColor(sf::Color::Cyan);
+		speed = 90.0f;
+		HP = 20;
+		setBull(5);
+		break;
 	}
 
 	body.setSize(size); //--
@@ -117,6 +123,16 @@ void Enemy::Update(float deltaTime)
 			delay1.restart();
 		}
 		break;
+	case 5:
+		movement.x += speed * ((position.x > thisPos.x) - (position.x < thisPos.x));
+		movement.y += speed * ((position.y > thisPos.y) - (position.y < thisPos.y));
+		if (delay1.getElapsedTime().asSeconds() > 4)
+		{
+			position.x = 1300 + rand() % 300;
+			position.y = 400 + rand() % 200;
+			delay1.restart();
+		}
+		break;
 			
 		}
 		
@@ -125,7 +141,18 @@ void Enemy::Update(float deltaTime)
 	body.move(movement * deltaTime);
 
 	//Shot
-	if (canShot == true)
+	
+	if (type == 5 && canShot == true)
+	{
+		if (delay3.getElapsedTime().asSeconds() >= 0.3)
+		{
+			count++;
+			this->bullets.push_back(Bullet(&bullTex, bullSize, sf::Vector2f(1120.0f, 50 + rand() % 850) , body.getSize(), -bullSpeed, bullType));
+			delay3.restart();
+		}
+		if (count >= 11) canShot = false;
+	}
+	else if (canShot == true)
 	{
 		canShot = false;
 		printf("enemy shot!\n");
@@ -134,10 +161,12 @@ void Enemy::Update(float deltaTime)
 	}
 
 	shotDelayTime += deltaTime;
+
 	if (shotDelayTime >= shotDelay)
 	{
 		canShot = true;
 		shotDelayTime = 0;
+		count = 0;
 	}
 	
 }

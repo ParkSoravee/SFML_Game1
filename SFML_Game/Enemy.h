@@ -45,5 +45,6 @@ private:
 
 	float delay2 = 0;
 	sf::Clock delay1;
-
+	sf::Clock delay3;
+	int count = 0;
 };
