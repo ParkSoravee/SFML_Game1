@@ -50,4 +50,5 @@ private:
 	sf::Clock delay3;
 	int count = 0;
 	int score = 0;
+	float tempY;
 };

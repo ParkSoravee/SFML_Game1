@@ -92,7 +92,13 @@ void Enemy::Update(float deltaTime)
 	switch (type)
 	{
 	case 1 :
-		movement.y += speed * ( (playerPos.y > thisPos.y)-(playerPos.y < thisPos.y) );
+		if (delay1.getElapsedTime().asSeconds() >= 2)
+		{
+			tempY = playerPos.y;
+			delay1.restart();
+		}
+		movement.y += speed * ((tempY > thisPos.y) - (tempY < thisPos.y));
+		
 		if (position.x < thisPos.x)
 			movement.x -= speed;
 	break;
@@ -185,7 +191,7 @@ void Enemy::Update(float deltaTime)
 	}
 
 	shotDelayTime += deltaTime;
-
+		
 	if (shotDelayTime >= shotDelay)
 	{
 		canShot = true;

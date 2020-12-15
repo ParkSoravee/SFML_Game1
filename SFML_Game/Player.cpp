@@ -42,7 +42,10 @@ void Player::Update(float deltaTime)
 	}
 	if (delayTime > 3.0f * 0.15f/*shotSwitchTime*/) //delay for shot
 		canShot = true;
-
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+	{
+		this->bullets.push_back(Bullet(&bullTex, bullSize, body.getPosition(), body.getSize(), bullSpeed, bullType));
+	}
 	//----
 
 	if (!canShot)
