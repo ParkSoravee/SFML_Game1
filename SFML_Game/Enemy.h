@@ -9,13 +9,14 @@ public:
 	Enemy(int type, sf::Vector2f possition);
 
 	sf::Vector2f getPosition() { return body.getPosition(); }
+	sf::Vector2f getSize() { return size; }
 
 	void Update(float deltaTime);
 	void Draw(sf::RenderWindow& window, float deltaTime, sf::Vector2f playerPos);
 
 	//--Collider
 	Collider GetCollider() { return Collider(body); }
-	void checkCollider(Collider temp);
+	bool checkCollider(Collider temp);
 
 	void hurt();
 	unsigned int getHP() { return HP; }
@@ -40,6 +41,9 @@ private:
 	float bullSpeed = 0;
 	sf::Vector2f bullSize;
 	unsigned int bullType = 0;
-	sf::Vector2f possition;
+	sf::Vector2f position;
+
+	float delay2 = 0;
+	sf::Clock delay1;
 
 };

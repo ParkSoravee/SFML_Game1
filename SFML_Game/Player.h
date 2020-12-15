@@ -17,11 +17,14 @@ public:
 	bool checkCollider(Collider temp);
 	
 	unsigned int getHP() { return HP; };
+	void reset();
 
 	std::vector<Bullet> getBull() { return bullets; }
 
 	//--Collider
 	Collider GetCollider() { return Collider(body); }
+
+	void hurt();
 
 private:
 	sf::RectangleShape body;
@@ -44,4 +47,6 @@ private:
 	sf::Vector2f bullSize;
 	unsigned int bullType = 0;
 	
+	bool canHurt = true;
+	sf::Clock delay;
 };

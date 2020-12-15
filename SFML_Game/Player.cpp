@@ -73,7 +73,12 @@ void Player::Draw(sf::RenderWindow& window, float deltaTime)
 
 bool Player::checkCollider(Collider temp)
 {
+	
 	//check Collider
+	if (GetCollider().CheckCollision(temp))
+	{
+		hurt();
+	}
 	
 	//--erase bull
 	for (int i = 0; i < bullets.size(); i++)
@@ -96,6 +101,29 @@ bool Player::checkCollider(Collider temp)
 	}
 	
 	return false;
+}
+
+
+void Player::reset()
+{
+	HP = 3;
+	body.setPosition(450.0f, 500.0f);
+
+}
+
+void Player::hurt()
+{
+	if (canHurt == true)
+	{
+		HP--;
+		delay.restart();
+		canHurt = false;
+	}
+	else if (delay.getElapsedTime().asSeconds() >= 1)
+	{
+		canHurt = true;
+		std::cout << "Can Hit again" << "\n";
+	}
 }
 
 void Player::setBull(int type)

@@ -1,10 +1,11 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int type, sf::Vector2f possition)
+Enemy::Enemy(int type, sf::Vector2f position)
 {
+	
 	//set anemy
 	this->type = type;
-	this->possition = possition;
+	this->position = position;
 
 	switch (type)
 	{
@@ -29,6 +30,13 @@ Enemy::Enemy(int type, sf::Vector2f possition)
 		HP = 4;
 		setBull(2);
 		break;
+	case 3:
+		size = sf::Vector2f(150, 120);
+		body.setFillColor(sf::Color::Green);
+		speed = 150.0f;
+		HP = 5;
+		setBull(3);
+		break;
 	}
 
 	body.setSize(size); //--
@@ -43,6 +51,7 @@ void Enemy::Update(float deltaTime)
 
 	timeForPoint += deltaTime;
 	thisPos.y = body.getPosition().y;
+	thisPos.x = body.getPosition().x;
 
 	/*if (timeForPoint > 1.5f)
 	{
@@ -56,27 +65,46 @@ void Enemy::Update(float deltaTime)
 	{
 	case 1 :
 		movement.y += speed * ( (playerPos.y > thisPos.y)-(playerPos.y < thisPos.y) );
-		if (possition.x <= body.getPosition().x)
+		if (position.x < thisPos.x)
 			movement.x -= speed;
 	break;
+	case 2 :
+		
+		if (thisPos.x > 1920.0f / 2.0f)
+		{
+			movement.x -= speed;
+			movement.y += speed * ((playerPos.y > thisPos.y) - (playerPos.y < thisPos.y));
+		}
+		else
+		{
+			delay2 += deltaTime;
+			if (delay2 >= 1)
+			{
+				speed = 450.0f;
+				movement.x -= speed;
+				movement.y = 0;
+			}
+			break;
+	case 3:
+		//position.x = rand();
+		if (position.x < thisPos.x)
+		{
+			movement.x -= speed;
+		}
+		movement.y += speed * ((position.y > thisPos.y) - (position.y < thisPos.y));
+		
+		if (delay1.getElapsedTime().asSeconds() > 4)
+		{
+			position.y = 150 + rand() % 600;
+			delay1.restart();
+		}
+
+		break;
+			
+		}
+		
 	}
 
-	/*deltaY = playerPos.y - thisPos.y;
-
-	if (deltaY > 0)
-	{
-		movement.y += speed;
-	}
-	else if (deltaY < 0)
-	{
-		movement.y -= speed;
-	}
-	//else
-	{
-		movement.y = 0;
-	}*/
-	
-	//printf("%f\n", thisPos.y);
 	body.move(movement * deltaTime);
 
 	//Shot
@@ -107,19 +135,8 @@ void Enemy::Draw(sf::RenderWindow& window, float deltaTime, sf::Vector2f playerP
 		bullet.Draw(window, deltaTime);
 }
 
-void Enemy::checkCollider(Collider temp)
+bool Enemy::checkCollider(Collider temp)
 {
-	//check Collider
-	//--enemies bullet vs player
-	for (Bullet& bullet : bullets)
-	{
-		if (bullet.GetCollider().CheckCollision(temp))
-		{
-			bullet.setDestroy(true);
-			printf("Collider! from anemy\n");
-		}
-	}
-
 	//--erase bull
 	for (int i = 0; i < bullets.size(); i++)
 	{
@@ -129,6 +146,19 @@ void Enemy::checkCollider(Collider temp)
 			printf("anemies bull erase\n");
 		}
 	}
+	//check Collider
+	//--enemies bullet vs player
+	for (Bullet& bullet : bullets)
+	{
+		if (bullet.GetCollider().CheckCollision(temp))
+		{
+			bullet.setDestroy(true);
+			printf("Collider! from anemy\n");
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void Enemy::hurt()
@@ -151,9 +181,9 @@ void Enemy::setBull(int type)
 	case 2:
 		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet C.png");
 		bullSize = sf::Vector2f(70.0f, 50.0f);
-		bullSpeed = 400.0f;
+		bullSpeed = 300.0f;
 		bullType = 0;
-		shotDelay = 3;
+		shotDelay = 4;
 		break;
 	case 3:
 		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet A.png");
