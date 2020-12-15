@@ -24,7 +24,7 @@ int main()
 	unsigned state = MAINMENUSTATE;
 
 	//score
-	unsigned int score = 99999;
+	unsigned int score = 9859;
 	bool isGameRun = 0;
 
 	bool ready = true;
@@ -254,6 +254,8 @@ int main()
 			{
 				window.close();
 			}
+
+			showText(sf::Vector2f(660.0f, 950.0f), "63010952 Soravee Rattanaapha", &font1, 40, window);
 			
 		}
 		else if (state == HIGHSCORESTATE)
@@ -326,6 +328,14 @@ int main()
 				}
 				enemies.push_back(Enemy(3, position));
 
+				position.x = 1300.0f + fmod(rand(), 500.0f);
+				for (int i = 0; i < enemies.size(); i++)
+				{
+					if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+				}
+				enemies.push_back(Enemy(4, position));
+
 				std::cout << enemies.size() << std::endl;
 				
 
@@ -365,7 +375,7 @@ int main()
 					}
 
 				}
-				if (enemies[i].getPosition().x < -200)
+				else if (enemies[i].getPosition().x < -200)
 				{
 					std::cout << enemies.size() << std::endl;
 					enemies.erase(enemies.begin() + i);
@@ -464,17 +474,27 @@ int main()
 				collectHS = true;
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
-			{
-				ready = true;
-				state = MAINMENUSTATE;
-			}
+			
+			Button Menu(840, 920, 250, 50, &font1, "EXIT", 40,
+				sf::Color(122, 122, 122, 255), sf::Color(122, 122, 122, 122), sf::Color(255, 255, 255, 0));
+
+			Menu.update(mousePosition);
 			//DRAW
 			for (Background& background : backgrounds)
 				background.Draw(window, deltaTime);
+
+			Menu.render(&window);
+
+			showText(sf::Vector2f(600.0f, 150.0f), "GAME OVER!", &font1, 120, window);
+			showText(sf::Vector2f(760.0f, 390.0f), "Your Score", &font1, 80, window);
+			showText(sf::Vector2f(830.0f, 515.0f), std::to_string(score), &font1, 100, window);
+			if (Menu.isPressed())
+			{
+				window.close();
+			}
 		}
 		window.display();
-
+		
 	}
 	return 0;
 }

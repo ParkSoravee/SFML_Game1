@@ -68,7 +68,7 @@ void Player::Draw(sf::RenderWindow& window, float deltaTime)
 	window.draw(body);
 
 	for (Bullet& bullet : this->bullets)
-		bullet.Draw(window, deltaTime);
+		bullet.Draw(window, deltaTime, sf::Vector2f(0.0f,0.0f));
 }
 
 bool Player::checkCollider(Collider temp)

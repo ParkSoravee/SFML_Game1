@@ -37,6 +37,14 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		HP = 5;
 		setBull(3);
 		break;
+	case 4:
+		size = sf::Vector2f(150, 120);
+		body.setFillColor(sf::Color::Magenta);
+		speed = 200.0f;
+		HP = 5;
+		setBull(4);
+		break;
+	
 	}
 
 	body.setSize(size); //--
@@ -98,7 +106,16 @@ void Enemy::Update(float deltaTime)
 			position.y = 150 + rand() % 600;
 			delay1.restart();
 		}
-
+		break;
+	case 4:
+		movement.x += speed * ((position.x > thisPos.x) - (position.x < thisPos.x));
+		movement.y += speed * ((position.y > thisPos.y) - (position.y < thisPos.y));
+		if (delay1.getElapsedTime().asSeconds() > 4)
+		{
+			position.x = 900 + rand() % 750;
+			position.y = 100 + rand() % 700;
+			delay1.restart();
+		}
 		break;
 			
 		}
@@ -132,7 +149,7 @@ void Enemy::Draw(sf::RenderWindow& window, float deltaTime, sf::Vector2f playerP
 	window.draw(body);
 
 	for (Bullet& bullet : this->bullets)
-		bullet.Draw(window, deltaTime);
+		bullet.Draw(window, deltaTime, playerPos);
 }
 
 bool Enemy::checkCollider(Collider temp)
@@ -197,7 +214,7 @@ void Enemy::setBull(int type)
 		bullSize = sf::Vector2f(70.0f, 70.0f);
 		bullSpeed = 300.0f;
 		bullType = 1; //follow
-		shotDelay = 2;
+		shotDelay = 4;
 		break;
 
 	case 5: //a lot random

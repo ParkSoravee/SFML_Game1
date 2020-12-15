@@ -3,7 +3,7 @@
 Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, sf::Vector2f playerSize, float speed, unsigned int type)
 {
 	
-		
+	this->type = type;
 	this->speed = speed;
 	body.setSize(size);
 	body.setOrigin(body.getSize() / 2.0f);
@@ -16,19 +16,41 @@ Bullet::Bullet(sf::Texture *texture, sf::Vector2f size, sf::Vector2f position, s
 
 }
 
-void Bullet::Update(float deltaTime)
+void Bullet::Update(float deltaTime, sf::Vector2f playerPos)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
+	thisPos.y = body.getPosition().y;
+	thisPos.x = body.getPosition().x;
 
-	movement.x += speed * deltaTime;
+	switch (type)
+	{
+	case 0:
+		movement.x += speed;
+		break;
+	case 1:
+		movement.x += speed;
+		if (thisPos.x - playerPos.x > 300)
+		{
+			movement.y -= speed * ((playerPos.y > thisPos.y) - (playerPos.y < thisPos.y));
+		}
+		else
+		{
+			movement.y = 0;
+		}
+		
+			break;
 
-	body.move(movement);
+	default:
+		break;
+	}
+
+	body.move(movement * deltaTime);
 
 }
 
-void Bullet::Draw(sf::RenderWindow& window, float deltaTime)
+void Bullet::Draw(sf::RenderWindow& window, float deltaTime, sf::Vector2f playerPos)
 {
-	Update(deltaTime);
+	Update(deltaTime, playerPos);
 	window.draw(body);
 }
 
