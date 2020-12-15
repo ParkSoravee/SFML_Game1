@@ -404,7 +404,7 @@ int main()
 					
 					}
 				}
-				printf("%d\n", kill);
+				//printf("%d\n", kill);
 				if (n == kill)
 				{
 					printf("next\n");
@@ -415,7 +415,7 @@ int main()
 				}
 				break;
 			case 1: 
-				printf("hhh");
+				printf("1");
 				if (gameTime.getElapsedTime().asSeconds() >= 2.0f)
 				{
 					canSpawn = true;
@@ -474,11 +474,11 @@ int main()
 					n = 0;
 					kill = 0;
 					GAMEPLAYSTATE++;
-
+					canSpawn = true;
 				}
 				break;
 			case 2:
-				printf("AAA");
+				printf("2");
 				if (gameTime.getElapsedTime().asSeconds() >= 2.0f)
 				{
 					canSpawn = true;
@@ -537,20 +537,142 @@ int main()
 					n = 0;
 					kill = 0;
 					GAMEPLAYSTATE++;
-
+					canSpawn = true;
 				}
 				break;
 			case 3:
 				printf("3");
+				if (gameTime.getElapsedTime().asSeconds() >= 1.2f)
+				{
+					canSpawn = true;
+					gameTime.restart();
+				}
+				if (canSpawn == true)
+				{
+					canSpawn = false;
+					switch (n)
+					{
+					case 0:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(4, position));
+						n++;
+						break;
+					case 1:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(4, position));
+						n++;
+						break;
+					case 2:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(3, position));
+						n++;
+						break;
+					case 3:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(2, position));
+						n++;
+						break;
+					case 4:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						for (int i = 0; i < enemies.size(); i++)
+						{
+							if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+								position.x = 1300.0f + fmod(rand(), 500.0f);
+						}
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(1, position));
+						n++;
+						break;
+					}
+				}
+				if (n == kill)
+				{
+					printf("next\n");
+					n = 0;
+					kill = 0;
+					GAMEPLAYSTATE++;
+					canSpawn = true;
+				}
 				break;
 			case 4:
-
-				break;
-			case 5:
+				printf("4");
+				if (gameTime.getElapsedTime().asSeconds() >= 1.2f)
+				{
+					canSpawn = true;
+					gameTime.restart();
+				}
+				if (canSpawn == true)
+				{
+					canSpawn = false;
+					switch (n)
+					{
+					case 0:
+						position.x = 1300.0f + fmod(rand(), 500.0f);
+						position.y = player.getPosition().y;
+						enemies.push_back(Enemy(5, position));
+						n++;
+						break;
+					
+					}
+				}
+				if (n == kill)
+				{
+					printf("next\n");
+					n = 0;
+					kill = 0;
+					GAMEPLAYSTATE++;
+					canSpawn = true;
+				}
 
 				break;
 			default: // random * boss
+				printf("5");
+				if (gameTime.getElapsedTime().asSeconds() >= 2.0f)
+				{
+					canSpawn = true;
+					gameTime.restart();
+				}
+				if (canSpawn && n < 6)
+				{
+					canSpawn = false;
+					position.x = 1300.0f + fmod(rand(), 500.0f);
+					for (int i = 0; i < enemies.size(); i++)
+					{
+						if (position.x >= enemies[i].getPosition().x - enemies[i].getSize().x && position.x <= enemies[i].getPosition().x + enemies[i].getSize().x)
+							position.x = 1300.0f + fmod(rand(), 500.0f);
+					}
+					position.y = player.getPosition().y;
+					enemies.push_back(Enemy(1 + rand() % 4, position));
+					n++;
+				}
 
+				if (n == kill)
+				{
+					printf("next\n");
+					n = 0;
+					kill = 0;
+					GAMEPLAYSTATE++;
+					canSpawn = true;
+				}
 				break;
 			}
 
@@ -589,7 +711,7 @@ int main()
 					{
 						kill++;
 						score += enemies[i].getScore();
-						enemies.erase(enemies.begin());
+						enemies.erase(enemies.begin() + i);
 						printf("%d\n", score);
 					}
 
@@ -618,17 +740,6 @@ int main()
 			if (player.getHP() <= 0)
 			{
 				
-				/*for (int i = 0; i < enemies.size(); i++)
-				{
-					std::cout << enemies.size() << std::endl;
-					enemies.erase(enemies.begin());
-					
-					printf("i = %d\n", i);
-				}
-				
-				std::cout << "Enemy = " << enemies.size() << std::endl;
-				*/
-				/*if(enemies.size() == 0)*/
 					state = GAMEOVERSTATE;
 			}
 

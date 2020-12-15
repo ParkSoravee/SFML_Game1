@@ -53,9 +53,9 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		size = sf::Vector2f(150*3, 120*3);
 		body.setFillColor(sf::Color::Cyan);
 		speed = 90.0f;
-		HP = 20;
+		HP = 40;
 		setBull(5);
-		score = 2000;
+		score = 4000;
 		break;
 	case 6:
 		size = sf::Vector2f(150, 120);
