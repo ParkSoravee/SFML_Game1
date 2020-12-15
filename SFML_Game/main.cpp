@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -11,7 +12,8 @@
 #define SC_Width 1080
 #define SC_Height 1920
 
-enum stateGame{MAINMENUSTATE = 0, GAMESTATE, GAMEOVERSTATE};
+enum stateGame{MAINMENUSTATE = 0, GAMESTATE, GAMEOVERSTATE, HIGHSCORESTATE};
+void showText(sf::Vector2f position, std::string word, sf::Font* font, int size, sf::RenderWindow& window);
 
 int main()
 {
@@ -22,7 +24,7 @@ int main()
 	unsigned state = MAINMENUSTATE;
 
 	//score
-	unsigned int score = 952;
+	unsigned int score = 99999;
 	bool isGameRun = 0;
 
 	bool ready = true;
@@ -98,8 +100,53 @@ int main()
 	backgrounds.push_back(Background(&bgTexture1[3], -25.0f));
 	backgrounds.push_back(Background(&bgTexture1[4], -150.0f));
 
-	float deltaTime = 0.0f;
+	//Text box
+	sf::RectangleShape object;
+	object.setSize(sf::Vector2f(300.0f, 70.0f));
+	object.setOrigin(sf::Vector2f(150.0f, 35.0f));
+	object.setFillColor(sf::Color(122, 122,122, 111));
+	object.setPosition(sf::Vector2f(window.getSize().x / 2, 440.0f)); // Edit here
+
+	sf::RectangleShape cursor;
+	cursor.setSize(sf::Vector2f(5.0f, 64.0f));
+	cursor.setOrigin(sf::Vector2f(2.5f, 32.0f));
+	cursor.setPosition(sf::Vector2f(655, 450.0f)); // Edit here
+	cursor.setFillColor(sf::Color::Black);
+
+	float totalTime = 0;
 	sf::Clock clock;
+	//bool state = false;
+
+	char last_char = ' ';
+
+	std::string input;
+	input = "";
+
+	sf::Text playerName;
+	playerName.setFont(font1);
+	playerName.setCharacterSize(40);
+	playerName.setFillColor(sf::Color::White);
+	
+	playerName.setPosition(object.getPosition().x - 130, object.getPosition().y - 25);
+
+	//HIGHSCORE
+	std::vector<std::pair<int, std::string>> highScore;
+	FILE* file;
+	char temp[25];
+	std::string nameArr[6];
+	int scoreArr[6];
+	bool collectHS = false;
+	file = fopen("./highScore.txt", "r");
+	for (int i = 0; i < 5; i++) {
+		fscanf(file, "%s", temp);
+		nameArr[i] = temp;
+		fscanf(file, "%d", &scoreArr[i]);
+		highScore.push_back(std::make_pair(scoreArr[i], nameArr[i]));
+	}
+	//---- 
+
+	float deltaTime = 0.0f;
+	//sf::Clock clock;
 	window.setFramerateLimit(120);
 
 	while (window.isOpen())
@@ -110,29 +157,148 @@ int main()
 
 		if (state == MAINMENUSTATE)
 		{
+			sf::Event event;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
 
 			
-			Button Newgame(900, 500 , 250, 50, &font1, "NEW GAME", 40,
+			Button Newgame(840, 520 , 250, 50, &font1, "NEW GAME", 40,
+				sf::Color(122, 122, 122, 255), sf::Color(122, 122, 122, 122), sf::Color(255, 255, 255, 0));
+			Button HighScore(840, 620, 250, 50, &font1, "HIGHSCORE", 40,
+				sf::Color(122, 122, 122, 255), sf::Color(122, 122, 122, 122), sf::Color(255, 255, 255, 0));
+			Button Exit(840, 720, 250, 50, &font1, "EXIT", 40,
 				sf::Color(122, 122, 122, 255), sf::Color(122, 122, 122, 122), sf::Color(255, 255, 255, 0));
 
 			Newgame.update(mousePosition);
+			HighScore.update(mousePosition);
+			Exit.update(mousePosition);
 
 
+			//text box
 
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+				{
+					window.close();
+				}
+			}
 
+			if (event.type == sf::Event::EventType::TextEntered)
+			{
+				if (last_char != event.text.unicode && event.text.unicode == 13 &&
+					input.length() > 0) // delete
+				{
+
+					state = GAMESTATE;
+
+				}
+				else if (last_char != event.text.unicode && event.text.unicode == 8 &&
+					input.length() > 0) // delete
+				{
+
+					last_char = event.text.unicode;
+					input.erase(input.length() - 1);
+					playerName.setString(input);
+					cursor.setPosition(650.0f + playerName.getGlobalBounds().width + 5, 450.0f);
+					std::cout << input << std::endl;
+
+				}
+				else if (last_char != event.text.unicode &&
+					(event.text.unicode >= 'a' && event.text.unicode <= 'z' ||
+						event.text.unicode >= 'A' && event.text.unicode <= 'Z' ||
+						event.text.unicode >= '0' && event.text.unicode <= '9'))
+				{
+					//std::cout << event.text.unicode << std::endl;
+					last_char = event.text.unicode;
+
+					input += event.text.unicode;
+
+					playerName.setString(input);
+
+					cursor.setPosition(650.0f + playerName.getGlobalBounds().width + 5, 450.0f);
+
+					std::cout << input << std::endl;
+				}
+
+			}
+
+			if (event.type == sf::Event::EventType::KeyReleased && last_char != ' ')
+			{
+				last_char = ' ';
+			}
+
+			
 
 			//DRAW
 			for (Background& background : backgrounds)
 				background.Draw(window, deltaTime);
 
+			window.draw(object);
+			window.draw(playerName);
+
+
 			Newgame.render(&window);
+			HighScore.render(&window);
+			Exit.render(&window);
 			if (Newgame.isPressed())
 			{
 				ready = true;
 				state = GAMESTATE;
 			}
+			if (HighScore.isPressed())
+			{
+				ready = true;
+				state = HIGHSCORESTATE;
+			}
+			if (Exit.isPressed())
+			{
+				window.close();
+			}
 			
+		}
+		else if (state == HIGHSCORESTATE)
+		{
+			if (ready == true)
+			{
+
+
+				highScore.erase(highScore.begin(), highScore.end());
+				file = fopen("./highScore.txt", "r");
+				for (int i = 0; i < 5; i++) {
+					fscanf(file, "%s", temp);
+					nameArr[i] = temp;
+					fscanf(file, "%d", &scoreArr[i]);
+					highScore.push_back(std::make_pair(scoreArr[i], nameArr[i]));
+				}
+				ready = false;
+			}
+				Button Back(840, 920, 250, 50, &font1, "BACK", 40,
+					sf::Color(122, 122, 122, 255), sf::Color(122, 122, 122, 122), sf::Color(255, 255, 255, 0));
+
+
+				Back.update(mousePosition);
+
+				//DRAW
+				for (Background& background : backgrounds)
+					background.Draw(window, deltaTime);
+				Back.render(&window);
+				
+				showText(sf::Vector2f(700.0f, 395.0f), highScore[0].second, &font1, 40, window);
+				showText(sf::Vector2f(1100.0f, 395.0f), std::to_string(highScore[0].first), &font1, 40, window);
+				showText(sf::Vector2f(700.0f, 445.0f), highScore[1].second, &font1, 40, window);
+				showText(sf::Vector2f(1100.0f, 445.0f), std::to_string(highScore[1].first), &font1, 40, window);
+				showText(sf::Vector2f(700.0f, 495.0f), highScore[2].second, &font1, 40, window);
+				showText(sf::Vector2f(1100.0f, 495.0f), std::to_string(highScore[2].first), &font1, 40, window);
+				showText(sf::Vector2f(700.0f, 545.0f), highScore[3].second, &font1, 40, window);
+				showText(sf::Vector2f(1100.0f, 545.0f), std::to_string(highScore[3].first), &font1, 40, window);
+				showText(sf::Vector2f(700.0f, 595.0f), highScore[4].second, &font1, 40, window);
+				showText(sf::Vector2f(1100.0f, 595.0f), std::to_string(highScore[4].first), &font1, 40, window);
+		
+				if (Back.isPressed())
+				{
+					state = MAINMENUSTATE;
+					ready = true;
+				}
 		}
 		else if (state == GAMESTATE)
 		{
@@ -272,6 +438,32 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
 
+			if (!collectHS) {
+				highScore.erase(highScore.begin(), highScore.end());
+				file = fopen("./highScore.txt", "r");
+				for (int i = 0; i < 5; i++) {
+					fscanf(file, "%s", temp);
+					nameArr[i] = temp;
+					fscanf(file, "%d", &scoreArr[i]);
+					highScore.push_back(std::make_pair(scoreArr[i], nameArr[i]));
+				}
+				/*if (playerName == "") {
+					playerName = "NoName";
+				}*/
+				
+				highScore.push_back(std::make_pair(score, input));
+				std::sort(highScore.begin(), highScore.end());
+				fclose(file);
+				file = fopen("./highScore.txt", "w");
+				char temp[26];
+				for (int i = 5; i >= 1; i--) {
+					strcpy(temp, highScore[i].second.c_str());
+					fprintf(file, "%s %d\n", temp, highScore[i].first);
+				}
+				fclose(file);
+				collectHS = true;
+			}
+
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
 			{
 				ready = true;
@@ -285,4 +477,15 @@ int main()
 
 	}
 	return 0;
+}
+
+void showText(sf::Vector2f position, std::string word, sf::Font* font, int size, sf::RenderWindow& window) {
+	sf::Text text;
+	text.setFont(*font);
+	text.setPosition(position);
+	text.setString(word);
+	text.setCharacterSize(size);
+	text.setOutlineColor(sf::Color::Black);
+	text.setOutlineThickness(3);
+	window.draw(text);
 }
