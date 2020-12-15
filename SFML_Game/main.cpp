@@ -310,7 +310,7 @@ int main()
 				position.x = 1300.0f + fmod(rand(), 500.0f);
 				position.y = player.getPosition().y;
 
-				enemies.push_back(Enemy(5, position));
+				enemies.push_back(Enemy(6, position));
 				/*enemies.push_back(Enemy(1, position));
 
 				position.x = 1300.0f + fmod(rand(), 500.0f);
