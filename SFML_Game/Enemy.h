@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include <vector>
 #include <iostream>
+#include <SFML/Audio.hpp>
 
 class Enemy
 {
@@ -65,4 +66,7 @@ private:
 	int count = 0;
 	int score = 0;
 	float tempY;
+
+	sf::Sound enemy3;
+	sf::SoundBuffer enemy3Buff;
 };

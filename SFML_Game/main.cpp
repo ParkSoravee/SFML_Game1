@@ -15,14 +15,38 @@
 enum stateGame{MAINMENUSTATE = 0, GAMESTATE, GAMEOVERSTATE, HIGHSCORESTATE};
 void showText(sf::Vector2f position, std::string word, sf::Font* font, int size, sf::RenderWindow& window);
 
+
 sf::Sound enemyDead;
 sf::SoundBuffer enemyDeadBuff;
+sf::Sound bossComing;
+sf::SoundBuffer bossComingBuff;
+sf::Sound hit;
+sf::SoundBuffer hitBuff;
+
+
+
+sf::Music bgMusic;
+
 
 int main()
 {
 	//sound
+	
+	bgMusic.openFromFile("./sounds/bg2.wav");
+	bgMusic.setLoop(true);
+	bgMusic.play();
+	bgMusic.setVolume(50);
+
 	enemyDeadBuff.loadFromFile("./sounds/enemyDead.wav");
 	enemyDead.setBuffer(enemyDeadBuff);
+
+	bossComingBuff.loadFromFile("./sounds/boss.wav");
+	bossComing.setBuffer(bossComingBuff);
+
+	hitBuff.loadFromFile("./sounds/hit1.wav");
+	hit.setBuffer(hitBuff);
+
+
 	//state game
 	sf::Clock gameTime;
 	bool canSpawn = true;
@@ -447,6 +471,7 @@ int main()
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
 						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
+						
 						n++;
 						break;
 					case 1:
@@ -643,6 +668,8 @@ int main()
 					switch (n)
 					{
 					case 0:
+						bossComing.play();
+						bossComing.setVolume(50);
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
 						enemies.push_back(Enemy(&enemyTex[4], sf::Vector2u(8, 3), 0.2f, 5, position));
@@ -723,12 +750,14 @@ int main()
 
 				if (player.checkCollider(temp1))
 				{	
-					
+					hit.play();
+					hit.setVolume(70);
+
 					enemies[i].hurt();
 					if (enemies[i].getHP() <= 0)
 					{
 						enemyDead.play();
-						enemyDead.setVolume(20);
+						enemyDead.setVolume(50);
 						kill++;
 						score += enemies[i].getScore();
 						enemies.erase(enemies.begin() + i);
@@ -753,6 +782,8 @@ int main()
 				Collider temp2 = player.GetCollider();
 				if (enemies[i].checkCollider(temp2))
 				{
+					hit.play();
+					hit.setVolume(70);
 					player.hurt();
 				}
 			}

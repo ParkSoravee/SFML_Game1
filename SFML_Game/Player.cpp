@@ -38,7 +38,7 @@ void Player::Update(float deltaTime)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->delayTime > 0.5)
 	{
 		shoot1.play();
-		shoot1.setVolume(20);
+		shoot1.setVolume(70);
 		canShot = false;
 		printf("shot!\n");
 		setBull(1);

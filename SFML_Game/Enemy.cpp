@@ -44,9 +44,11 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, in
 		HP = 5;
 		setBull(3);
 		score = 500;
+		enemy3Buff.loadFromFile("./sounds/ed1.wav");
+		enemy3.setBuffer(enemy3Buff);
 		break;
 	case 4:
-		size = sf::Vector2f(150, 120);
+		size = sf::Vector2f(140, 150);
 		
 		speed = 200.0f;
 		HP = 5;
@@ -209,6 +211,11 @@ void Enemy::Update(float deltaTime)
 		printf("enemy shot!\n");
 		canAnShot = false;
 		this->bullets.push_back(Bullet(&bullTex, bullSize, body.getPosition(), body.getSize(), -bullSpeed, bullType)); //speed positive = player
+		if (type == 3)
+		{
+			enemy3.play();
+			enemy3.setVolume(60);
+		}
 	}
 
 	shotDelayTime += deltaTime;
