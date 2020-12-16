@@ -15,8 +15,14 @@
 enum stateGame{MAINMENUSTATE = 0, GAMESTATE, GAMEOVERSTATE, HIGHSCORESTATE};
 void showText(sf::Vector2f position, std::string word, sf::Font* font, int size, sf::RenderWindow& window);
 
+sf::Sound enemyDead;
+sf::SoundBuffer enemyDeadBuff;
+
 int main()
 {
+	//sound
+	enemyDeadBuff.loadFromFile("./sounds/enemyDead.wav");
+	enemyDead.setBuffer(enemyDeadBuff);
 	//state game
 	sf::Clock gameTime;
 	bool canSpawn = true;
@@ -721,6 +727,8 @@ int main()
 					enemies[i].hurt();
 					if (enemies[i].getHP() <= 0)
 					{
+						enemyDead.play();
+						enemyDead.setVolume(20);
 						kill++;
 						score += enemies[i].getScore();
 						enemies.erase(enemies.begin() + i);

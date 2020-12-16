@@ -5,6 +5,8 @@
 #include "Collider.h"
 #include <vector>
 #include <iostream>
+#include <SFML/Audio.hpp>
+
 class Player
 {
 public:
@@ -49,4 +51,7 @@ private:
 	
 	bool canHurt = true;
 	sf::Clock delay;
+
+	sf::Sound shoot1;
+	sf::SoundBuffer shootBuff;
 };

@@ -15,6 +15,9 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	body.setPosition(450.0f, 500.0f);
 	body.setTexture(texture);
 
+	
+	shootBuff.loadFromFile("./sounds/shoot1.wav");
+	shoot1.setBuffer(shootBuff);
 }
 
 void Player::Update(float deltaTime)
@@ -34,6 +37,8 @@ void Player::Update(float deltaTime)
 	this->delayTime += deltaTime;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->delayTime > 0.5)
 	{
+		shoot1.play();
+		shoot1.setVolume(20);
 		canShot = false;
 		printf("shot!\n");
 		setBull(1);
