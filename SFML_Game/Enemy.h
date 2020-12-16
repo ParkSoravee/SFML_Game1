@@ -9,7 +9,7 @@
 class Enemy
 {
 public:
-	Enemy(int type, sf::Vector2f possition);
+	Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, int type, sf::Vector2f possition);
 
 	sf::Vector2f getPosition() { return body.getPosition(); }
 	sf::Vector2f getSize() { return size; }
@@ -30,7 +30,15 @@ private:
 	sf::RectangleShape body;
 	sf::Vector2f size;
 
-	
+	Animation normalAnimation;
+	Animation shotAnimation;
+	unsigned int row;
+	unsigned int colum;
+	float switchTime = 0.2f;
+	sf::Texture* texture;
+	sf::Vector2u imageCount;
+	bool canAnShot = false;
+	sf::Clock delayAn;
 
 	float speed = 0.0f;
 	sf::Vector2f thisPos;

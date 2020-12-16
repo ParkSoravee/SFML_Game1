@@ -1,8 +1,11 @@
 #include "Enemy.h"
 
-Enemy::Enemy(int type, sf::Vector2f position)
+Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, int type, sf::Vector2f position) :
+	normalAnimation(texture, imageCount, switchTime),
+	shotAnimation(texture, imageCount, 0.15f)
 {
-	
+	row = 0;
+	colum = 8;
 	//set anemy
 	this->type = type;
 	this->position = position;
@@ -13,9 +16,10 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		//possition
 
 		//size
-		size = sf::Vector2f(150, 120);
+		size = sf::Vector2f(170, 120);
 		//texture
-		body.setFillColor(sf::Color::Blue);
+		//body.setFillColor(sf::Color::Blue);
+		
 		//speed
 		speed = 200.0f;
 		//hp
@@ -27,7 +31,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		break;
 	case 2:
 		size = sf::Vector2f(150, 120);
-		body.setFillColor(sf::Color::Red);
+	
 		speed = 160.0f;
 		HP = 4;
 		setBull(2);
@@ -35,7 +39,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		break;
 	case 3:
 		size = sf::Vector2f(150, 120);
-		body.setFillColor(sf::Color::Green);
+		
 		speed = 150.0f;
 		HP = 5;
 		setBull(3);
@@ -43,7 +47,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 		break;
 	case 4:
 		size = sf::Vector2f(150, 120);
-		body.setFillColor(sf::Color::Magenta);
+		
 		speed = 200.0f;
 		HP = 5;
 		setBull(4);
@@ -70,6 +74,7 @@ Enemy::Enemy(int type, sf::Vector2f position)
 	body.setSize(size); //--
 	body.setPosition( 2000, 100 + (rand() % 900) ); //random with condition
 	body.setOrigin(body.getSize() / 2.0f);
+	body.setTexture(texture);
 	/*body.setFillColor(sf::Color::Blue);*/
 }
 
@@ -167,6 +172,22 @@ void Enemy::Update(float deltaTime)
 		}
 		
 	}
+	if (delayAn.getElapsedTime().asSeconds() >= 0.5f)
+	{
+		canAnShot = false;
+		delayAn.restart();
+	}
+	//animation
+	if (canAnShot)
+	{
+		shotAnimation.Update(1, deltaTime, 2);
+		body.setTextureRect(shotAnimation.uvRect);
+	}
+	else
+	{
+		normalAnimation.Update(0, deltaTime, 8);
+		body.setTextureRect(normalAnimation.uvRect);
+	}
 
 	body.move(movement * deltaTime);
 
@@ -186,7 +207,7 @@ void Enemy::Update(float deltaTime)
 	{
 		canShot = false;
 		printf("enemy shot!\n");
-		
+		canAnShot = false;
 		this->bullets.push_back(Bullet(&bullTex, bullSize, body.getPosition(), body.getSize(), -bullSpeed, bullType)); //speed positive = player
 	}
 
@@ -198,6 +219,7 @@ void Enemy::Update(float deltaTime)
 		shotDelayTime = 0;
 		count = 0;
 	}
+	
 	
 }
 

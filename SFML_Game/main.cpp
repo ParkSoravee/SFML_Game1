@@ -85,10 +85,21 @@ int main()
 	std::vector<Enemy> enemies;
 	//possition = ( player.getPosition().x, player.getPosition().y );
 	
+	
+	//--- spite
+	sf::Texture enemyTex[6];
+	enemyTex[0].loadFromFile("./sprite/enemy1.png");
+	enemyTex[1].loadFromFile("./sprite/enemy2.png");
+	enemyTex[2].loadFromFile("./sprite/enemy3.png");
+	enemyTex[3].loadFromFile("./sprite/enemy4.png");
+	/*enemyTex[4].loadFromFile("");
+	enemyTex[5].loadFromFile("");*/
+
 	Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 550.0f);
 	//Player player(&playerTexture, sf::Vector2u(8, 6), 0.2f, 550.0f);
 	//float randomY = fmod(rand(), 500.0f);
-	
+
+	//----
 
 	//----Background
 	sf::Texture bgTexture1[5];
@@ -365,7 +376,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
 						n++;
 						break;
 					case 1:
@@ -376,7 +387,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
 						n++;
 						break;
 					case 2:
@@ -387,7 +398,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
 						n++;
 						break;
 					case 3:
@@ -398,7 +409,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
 						n++;
 						break;
 					
@@ -429,7 +440,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
 						n++;
 						break;
 					case 1:
@@ -440,7 +451,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
 						n++;
 						break;
 					case 2:
@@ -451,7 +462,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
 						n++;
 						break;
 					case 3:
@@ -462,7 +473,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
 						n++;
 						break;
 
@@ -492,7 +503,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
 						n++;
 						break;
 					case 1:
@@ -503,7 +514,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
 						n++;
 						break;
 					case 2:
@@ -514,7 +525,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
 						n++;
 						break;
 					case 3:
@@ -525,7 +536,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(4, position));
+						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position));
 						n++;
 						break;
 
@@ -555,7 +566,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(4, position));
+						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position));
 						n++;
 						break;
 					case 1:
@@ -566,7 +577,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(4, position));
+						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position));
 						n++;
 						break;
 					case 2:
@@ -577,7 +588,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
 						n++;
 						break;
 					case 3:
@@ -588,7 +599,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
 						n++;
 						break;
 					case 4:
@@ -599,7 +610,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
 						n++;
 						break;
 					}
@@ -628,7 +639,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(5, position));
+						enemies.push_back(Enemy(&enemyTex[4], sf::Vector2u(8, 3), 0.2f, 5, position));
 						n++;
 						break;
 					
@@ -661,7 +672,8 @@ int main()
 							position.x = 1300.0f + fmod(rand(), 500.0f);
 					}
 					position.y = player.getPosition().y;
-					enemies.push_back(Enemy(1 + rand() % 4, position));
+					unsigned int temp = 1 + rand() % 4;
+					enemies.push_back(Enemy(&enemyTex[temp], sf::Vector2u(8, 3), 0.2f, temp, position));
 					n++;
 				}
 
@@ -705,7 +717,7 @@ int main()
 
 				if (player.checkCollider(temp1))
 				{	
-					std::cout << "IN COLLIDER \n";
+					
 					enemies[i].hurt();
 					if (enemies[i].getHP() <= 0)
 					{
