@@ -10,7 +10,7 @@
 class Enemy
 {
 public:
-	Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, int type, sf::Vector2f possition);
+	Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, int type, sf::Vector2f possition, sf::Texture* bullTex);
 
 	sf::Vector2f getPosition() { return body.getPosition(); }
 	sf::Vector2f getSize() { return size; }
@@ -54,7 +54,7 @@ private:
 	float shotDelay = 1;
 	float shotDelayTime = 0;
 	void setBull(int type);
-	sf::Texture bullTex;
+	sf::Texture *bullTex;
 	float bullSpeed = 0;
 	sf::Vector2f bullSize;
 	unsigned int bullType = 0;

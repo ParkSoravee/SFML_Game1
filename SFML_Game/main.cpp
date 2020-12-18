@@ -133,6 +133,17 @@ int main()
 
 	//----
 
+	//Enemy Bullet texture
+	sf::Texture enemyBullets[6];
+	enemyBullets[0].loadFromFile("./sprite/Bullets/Villain Bullet E.png");
+	enemyBullets[1].loadFromFile("./sprite/Bullets/Villain Bullet C.png");
+	enemyBullets[2].loadFromFile("./sprite/Bullets/Villain Bullet A.png");
+	enemyBullets[3].loadFromFile("./sprite/Bullets/Villain Bullet B.png");
+	enemyBullets[4].loadFromFile("./sprite/Bullets/Villain Bullet D.png");
+	enemyBullets[5].loadFromFile("./sprite/Bullets/Villain Bullet F.png");
+
+	//---
+
 	//----Background
 	sf::Texture bgTexture1[5];
 	bgTexture1[0].loadFromFile("./sprite/bg/bg1/Sky.png");
@@ -408,7 +419,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position, &enemyBullets[0]));
 						n++;
 						break;
 					case 1:
@@ -419,7 +430,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position, &enemyBullets[0]));
 						n++;
 						break;
 					case 2:
@@ -430,7 +441,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position, &enemyBullets[1]));
 						n++;
 						break;
 					case 3:
@@ -441,7 +452,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position, &enemyBullets[1]));
 						n++;
 						break;
 					
@@ -472,7 +483,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position, &enemyBullets[2]));
 						
 						n++;
 						break;
@@ -484,7 +495,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position, &enemyBullets[1]));
 						n++;
 						break;
 					case 2:
@@ -495,7 +506,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position, &enemyBullets[1]));
 						n++;
 						break;
 					case 3:
@@ -506,7 +517,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position, &enemyBullets[0]));
 						n++;
 						break;
 
@@ -536,7 +547,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position, &enemyBullets[1]));
 						n++;
 						break;
 					case 1:
@@ -547,7 +558,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position, &enemyBullets[2]));
 						n++;
 						break;
 					case 2:
@@ -558,7 +569,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position, &enemyBullets[2]));
 						n++;
 						break;
 					case 3:
@@ -569,7 +580,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position));
+						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position, &enemyBullets[3]));
 						n++;
 						break;
 
@@ -599,7 +610,7 @@ int main()
 					case 0:
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position));
+						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position, &enemyBullets[3]));
 						n++;
 						break;
 					case 1:
@@ -610,7 +621,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position));
+						enemies.push_back(Enemy(&enemyTex[3], sf::Vector2u(8, 3), 0.2f, 4, position, &enemyBullets[3]));
 						n++;
 						break;
 					case 2:
@@ -621,7 +632,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position));
+						enemies.push_back(Enemy(&enemyTex[2], sf::Vector2u(8, 3), 0.2f, 3, position, &enemyBullets[2]));
 						n++;
 						break;
 					case 3:
@@ -632,7 +643,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position));
+						enemies.push_back(Enemy(&enemyTex[1], sf::Vector2u(8, 3), 0.2f, 2, position, &enemyBullets[1]));
 						n++;
 						break;
 					case 4:
@@ -643,7 +654,7 @@ int main()
 								position.x = 1300.0f + fmod(rand(), 500.0f);
 						}
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position));
+						enemies.push_back(Enemy(&enemyTex[0], sf::Vector2u(8, 3), 0.2f, 1, position, &enemyBullets[0]));
 						n++;
 						break;
 					}
@@ -671,10 +682,10 @@ int main()
 					{
 					case 0:
 						bossComing.play();
-						bossComing.setVolume(50);
+						bossComing.setVolume(80);
 						position.x = 1300.0f + fmod(rand(), 500.0f);
 						position.y = player.getPosition().y;
-						enemies.push_back(Enemy(&enemyTex[4], sf::Vector2u(8, 3), 0.2f, 5, position));
+						enemies.push_back(Enemy(&enemyTex[4], sf::Vector2u(8, 3), 0.2f, 5, position, &enemyBullets[4]));
 						n++;
 						break;
 					
@@ -709,7 +720,7 @@ int main()
 					position.y = player.getPosition().y;
 					unsigned int temp = 1 + rand() % 6;
 					if (temp == 5) temp++;
-					enemies.push_back(Enemy(&enemyTex[temp-1], sf::Vector2u(8, 3), 0.2f, temp, position));
+					enemies.push_back(Enemy(&enemyTex[temp-1], sf::Vector2u(8, 3), 0.2f, temp, position, &enemyBullets[temp-1]));
 					n++;
 				}
 

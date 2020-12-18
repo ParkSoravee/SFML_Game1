@@ -1,14 +1,16 @@
 #include "Enemy.h"
 
-Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, int type, sf::Vector2f position) :
+Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, int type, sf::Vector2f position, sf::Texture* bullTex) :
 	normalAnimation(texture, imageCount, switchTime),
 	shotAnimation(texture, imageCount, 0.15f)
 {
+	this->bullTex = bullTex;
 	row = 0;
 	colum = 8;
 	//set anemy
 	this->type = type;
 	this->position = position;
+	
 
 	switch (type)
 	{
@@ -200,7 +202,7 @@ void Enemy::Update(float deltaTime)
 		if (delay3.getElapsedTime().asSeconds() >= 0.3)
 		{
 			count++;
-			this->bullets.push_back(Bullet(&bullTex, bullSize, sf::Vector2f(1120.0f, 50 + rand() % 850) , body.getSize(), -bullSpeed, bullType));
+			this->bullets.push_back(Bullet(bullTex, bullSize, sf::Vector2f(1120.0f, 50 + rand() % 850) , body.getSize(), -bullSpeed, bullType));
 			delay3.restart();
 		}
 		if (count >= 11) canShot = false;
@@ -210,7 +212,7 @@ void Enemy::Update(float deltaTime)
 		canShot = false;
 		printf("enemy shot!\n");
 		canAnShot = false;
-		this->bullets.push_back(Bullet(&bullTex, bullSize, body.getPosition(), body.getSize(), -bullSpeed, bullType)); //speed positive = player
+		this->bullets.push_back(Bullet(bullTex, bullSize, body.getPosition(), body.getSize(), -bullSpeed, bullType)); //speed positive = player
 		if (type == 3)
 		{
 			enemy3.play();
@@ -277,28 +279,28 @@ void Enemy::setBull(int type)
 	switch (type)
 	{
 	case 1:
-		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet E.png");
+		//bullTex.loadFromFile("./sprite/Bullets/Villain Bullet E.png");
 		bullSize = sf::Vector2f(85.0f, 50.0f);
 		bullSpeed = 600.0f;
 		bullType = 0;
 		shotDelay = 1.5;
 		break;
 	case 2:
-		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet C.png");
+		//bullTex.loadFromFile("./sprite/Bullets/Villain Bullet C.png");
 		bullSize = sf::Vector2f(70.0f, 50.0f);
 		bullSpeed = 300.0f;
 		bullType = 0;
 		shotDelay = 4;
 		break;
 	case 3:
-		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet A.png");
+		//bullTex.loadFromFile("./sprite/Bullets/Villain Bullet A.png");
 		bullSize = sf::Vector2f(100.0f, 25.0f);
 		bullSpeed = 1100.0f;
 		bullType = 0;
 		shotDelay = 4;
 		break;
 	case 4:
-		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet B.png");
+		//bullTex.loadFromFile("./sprite/Bullets/Villain Bullet B.png");
 		bullSize = sf::Vector2f(70.0f, 70.0f);
 		bullSpeed = 300.0f;
 		bullType = 1; //follow
@@ -306,7 +308,7 @@ void Enemy::setBull(int type)
 		break;
 
 	case 5: //a lot random
-		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet D.png");
+		//bullTex.loadFromFile("./sprite/Bullets/Villain Bullet D.png");
 		bullSize = sf::Vector2f(50.0f, 50.0f);
 		bullSpeed = 300.0f;
 		bullType = 2; //random a lot
@@ -314,7 +316,7 @@ void Enemy::setBull(int type)
 		break;
 
 	case 6: //fire
-		bullTex.loadFromFile("./sprite/Bullets/Villain Bullet F.png");
+		//bullTex.loadFromFile("./sprite/Bullets/Villain Bullet F.png");
 		bullSize = sf::Vector2f(170.0f, 150.0f);
 		bullSpeed = 700.0f; //random??
 		bullType = 0; //
