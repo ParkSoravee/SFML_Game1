@@ -115,13 +115,15 @@ int main()
 	std::vector<Enemy> enemies;
 	//possition = ( player.getPosition().x, player.getPosition().y );
 	
-	
 	//--- spite
 	sf::Texture enemyTex[6];
 	enemyTex[0].loadFromFile("./sprite/enemy1.png");
 	enemyTex[1].loadFromFile("./sprite/enemy2.png");
 	enemyTex[2].loadFromFile("./sprite/enemy3.png");
 	enemyTex[3].loadFromFile("./sprite/enemy4.png");
+	enemyTex[4].loadFromFile("./sprite/enemy3.png");
+	enemyTex[5].loadFromFile("./sprite/enemy1.png");
+
 	/*enemyTex[4].loadFromFile("");
 	enemyTex[5].loadFromFile("");*/
 
@@ -138,7 +140,7 @@ int main()
 	bgTexture1[2].loadFromFile("./sprite/bg/bg1/mountainB.png");
 	bgTexture1[3].loadFromFile("./sprite/bg/bg1/cloud.png");
 	bgTexture1[4].loadFromFile("./sprite/bg/bg1/land2.png");
-
+	
 	std::vector<Background> backgrounds;
 	backgrounds.push_back(Background(&bgTexture1[0], -50.0f));
 	backgrounds.push_back(Background(&bgTexture1[1], -100.0f));
@@ -705,8 +707,9 @@ int main()
 							position.x = 1300.0f + fmod(rand(), 500.0f);
 					}
 					position.y = player.getPosition().y;
-					unsigned int temp = 1 + rand() % 4;
-					enemies.push_back(Enemy(&enemyTex[temp], sf::Vector2u(8, 3), 0.2f, temp, position));
+					unsigned int temp = 1 + rand() % 6;
+					if (temp == 5) temp++;
+					enemies.push_back(Enemy(&enemyTex[temp-1], sf::Vector2u(8, 3), 0.2f, temp, position));
 					n++;
 				}
 

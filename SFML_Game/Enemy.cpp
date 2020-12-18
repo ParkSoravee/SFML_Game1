@@ -57,7 +57,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, in
 		break;
 	case 5:
 		size = sf::Vector2f(150*3, 120*3);
-		body.setFillColor(sf::Color::Cyan);
+		
 		speed = 90.0f;
 		HP = 40;
 		setBull(5);
@@ -65,7 +65,7 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, in
 		break;
 	case 6:
 		size = sf::Vector2f(150, 120);
-		body.setFillColor(sf::Color::Yellow);
+		
 		speed = 400.0f;
 		HP = 7;
 		setBull(6);
