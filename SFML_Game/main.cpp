@@ -30,6 +30,16 @@ sf::Music bgMusic;
 
 int main()
 {
+	//Head
+	sf::Texture head;
+	sf::RectangleShape header;
+	head.loadFromFile("./sprite/eagle go.png");
+	header.setTexture(&head);
+	header.setSize(sf::Vector2f(800,200));
+	header.setOrigin(header.getSize().x / 2.0f , header.getSize().y / 2.0f);
+	header.setPosition(1920.0f / 2.0f , 200.0f);
+	//----
+
 	//sound
 	
 	bgMusic.openFromFile("./sounds/bg2.wav");
@@ -45,7 +55,6 @@ int main()
 
 	hitBuff.loadFromFile("./sounds/hit1.wav");
 	hit.setBuffer(hitBuff);
-
 
 	//state game
 	sf::Clock gameTime;
@@ -218,7 +227,6 @@ int main()
 		{
 			sf::Event event;
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
-
 			
 			Button Newgame(840, 520 , 250, 50, &font1, "NEW GAME", 40,
 				sf::Color(122, 122, 122, 255), sf::Color(122, 122, 122, 122), sf::Color(255, 255, 255, 0));
@@ -294,7 +302,7 @@ int main()
 
 			window.draw(object);
 			window.draw(playerName);
-
+			window.draw(header);
 
 			Newgame.render(&window);
 			HighScore.render(&window);

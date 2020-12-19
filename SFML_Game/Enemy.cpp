@@ -15,13 +15,9 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, in
 	switch (type)
 	{
 	case 1:
-		//possition
-
 		//size
 		size = sf::Vector2f(170, 120);
-		//texture
-		//body.setFillColor(sf::Color::Blue);
-		
+
 		//speed
 		speed = 200.0f;
 		//hp
@@ -66,9 +62,9 @@ Enemy::Enemy(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, in
 		score = 4000;
 		break;
 	case 6:
-		size = sf::Vector2f(150, 120);
+		size = sf::Vector2f(190, 140);
 		
-		speed = 400.0f;
+		speed = 200.0f;
 		HP = 7;
 		setBull(6);
 		score = 1000;
@@ -320,7 +316,7 @@ void Enemy::setBull(int type)
 		bullSize = sf::Vector2f(170.0f, 150.0f);
 		bullSpeed = 700.0f; //random??
 		bullType = 0; //
-		shotDelay = 6.5;
+		shotDelay = 5;
 		break;
 
 	default:
